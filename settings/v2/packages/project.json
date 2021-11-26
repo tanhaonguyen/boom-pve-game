@@ -1,0 +1,15 @@
+{
+  "__version__": "1.0.1",
+  "general": {
+    "designResolution": {
+      "fitHeight": true,
+      "height": 640
+    }
+  },
+  "layer": [
+    {
+      "name": "Floor",
+      "value": 1
+    }
+  ]
+}
