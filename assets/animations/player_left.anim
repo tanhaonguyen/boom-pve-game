@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "player_down",
+    "_name": "player_left",
     "_objFlags": 0,
     "_native": "",
     "sample": 60,
@@ -60,23 +60,23 @@
     ],
     "_values": [
       {
-        "__uuid__": "e144a1cb-34f4-4653-aebe-fc3f82616463@f9941",
+        "__uuid__": "d45dab80-f8d7-4a5e-8ce1-d632da17351c@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "f3a7a888-7977-4d0f-8d7c-4adf2ab56922@f9941",
+        "__uuid__": "133c2f17-6be5-44f1-b654-dc6fc391bb5d@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "e941c849-52e7-474b-babd-a5d7db3f83c1@f9941",
+        "__uuid__": "0ddcc7f6-eb8a-4ba8-90ea-008d7adee744@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "0ec4a150-5b4d-4839-84c4-088fe0dafcdc@f9941",
+        "__uuid__": "00a5cfbc-4887-48c5-9ded-341bd73a4ed1@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "9a098744-77cf-448b-af0e-30dea583db09@f9941",
+        "__uuid__": "2ff65dec-5dc7-400e-81b4-9c05b6dc01d4@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]
