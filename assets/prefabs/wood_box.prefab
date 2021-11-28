@@ -14,6 +14,7 @@
     "__type__": "cc.Node",
     "_name": "wood_box",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [],
     "_active": true,
@@ -36,8 +37,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -148,
-      "y": 77,
+      "x": -320,
+      "y": 120,
       "z": 0
     },
     "_lrot": {
@@ -186,13 +187,13 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 20.4,
-      "y": 32.4
+      "x": 20,
+      "y": 20
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 34.8,
-      "height": 28.1
+      "width": 40,
+      "height": 40
     },
     "_id": ""
   },

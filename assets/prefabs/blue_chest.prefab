@@ -36,8 +36,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -640,
-      "y": -200,
+      "x": -280,
+      "y": -240,
       "z": 0
     },
     "_lrot": {
@@ -171,6 +171,7 @@
     "__type__": "cc.BoxCollider2D",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -186,19 +187,19 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 20.2,
-      "y": 43.8
+      "x": 20,
+      "y": 20.3
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 40.3,
-      "height": 30.5
+      "width": 40,
+      "height": 40.6
     },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "f5cM8WpMJEraTN7eTSI2M6"
+    "fileId": "15uOlwuydMbbnHdidCf2CE"
   },
   {
     "__type__": "cc.PrefabInfo",
