@@ -21,21 +21,19 @@ export class PlayerMovement extends Component {
     private arrow_right_down: boolean = false;
     private arrow_up_down: boolean = false;
     private arrow_down_down: boolean = false;
-    
+
     //------------------------------------------------------------------------------
     @property
-    boom_amount: number = 1;
+    boom_amount: number = null;
     @property
-    moving_offset: number = 20;
-    @property({type: Prefab})
+    moving_offset: number = null;
+    @property({ type: Prefab })
     bomb_prefab: Prefab = null;
 
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
         systemEvent.on(SystemEvent.EventType.KEY_DOWN, this.onKeyPressed, this);
         systemEvent.on(SystemEvent.EventType.KEY_UP, this.onKeyReleased, this);
-
-        // this.scene = director.getScene();
     }
 
     start() {
@@ -51,6 +49,7 @@ export class PlayerMovement extends Component {
     //------------------------------------------------------------------------------
     onKeyPressed(event: EventKeyboard) {
         switch (event.keyCode) {
+
             case KeyCode.ARROW_LEFT:
                 if (!this.arrow_left_down) {
                     this.getComponent(Animation).play("player_left");
@@ -58,6 +57,7 @@ export class PlayerMovement extends Component {
                 }
                 this.node.setPosition(this.node.position.x - this.moving_offset, this.node.position.y);
                 break;
+
             case KeyCode.ARROW_RIGHT:
                 if (!this.arrow_right_down) {
                     this.getComponent(Animation).play("player_right");
@@ -65,6 +65,7 @@ export class PlayerMovement extends Component {
                 }
                 this.node.setPosition(this.node.position.x + this.moving_offset, this.node.position.y);
                 break;
+
             case KeyCode.ARROW_UP:
                 if (!this.arrow_up_down) {
                     this.getComponent(Animation).play("player_up");
@@ -72,6 +73,7 @@ export class PlayerMovement extends Component {
                 }
                 this.node.setPosition(this.node.position.x, this.node.position.y + this.moving_offset);
                 break;
+
             case KeyCode.ARROW_DOWN:
                 if (!this.arrow_down_down) {
                     this.getComponent(Animation).play("player_down");
@@ -79,6 +81,7 @@ export class PlayerMovement extends Component {
                 }
                 this.node.setPosition(this.node.position.x, this.node.position.y - this.moving_offset);
                 break;
+
             case KeyCode.SPACE:
                 // console.log("SPACEBAR pressed");
                 let bomb = instantiate(this.bomb_prefab);
@@ -88,7 +91,6 @@ export class PlayerMovement extends Component {
                 let suitableX = this.findBombCoordinate(this.node.position.x, 40);
                 let suitableY = this.findBombCoordinate(this.node.position.y, 40);
                 bomb.setPosition(new Vec3(suitableX, suitableY, 0));
-
                 break;
         }
     }
@@ -98,7 +100,7 @@ export class PlayerMovement extends Component {
         switch (event.keyCode) {
             case KeyCode.ARROW_LEFT:
                 other_key_down_exist = this.arrow_right_down || this.arrow_up_down || this.arrow_down_down;
-                if (!other_key_down_exist){
+                if (!other_key_down_exist) {
                     this.getComponent(Animation).play("player_idle_left");
                 }
 
@@ -106,7 +108,7 @@ export class PlayerMovement extends Component {
                 break;
             case KeyCode.ARROW_RIGHT:
                 other_key_down_exist = this.arrow_left_down || this.arrow_up_down || this.arrow_down_down;
-                if (!other_key_down_exist){
+                if (!other_key_down_exist) {
                     this.getComponent(Animation).play("player_idle_right");
                 }
 
@@ -114,7 +116,7 @@ export class PlayerMovement extends Component {
                 break;
             case KeyCode.ARROW_UP:
                 other_key_down_exist = this.arrow_right_down || this.arrow_left_down || this.arrow_down_down;
-                if (!other_key_down_exist){
+                if (!other_key_down_exist) {
                     this.getComponent(Animation).play("player_idle_up");
                 }
 
@@ -122,7 +124,7 @@ export class PlayerMovement extends Component {
                 break;
             case KeyCode.ARROW_DOWN:
                 other_key_down_exist = this.arrow_right_down || this.arrow_up_down || this.arrow_left_down;
-                if (!other_key_down_exist){
+                if (!other_key_down_exist) {
                     this.getComponent(Animation).play("player_idle_down");
                 }
 
@@ -133,9 +135,9 @@ export class PlayerMovement extends Component {
         }
     }
     //------------------------------------------------------------------------------
-    findBombCoordinate(num: number, tileSize: number): number{
+    findBombCoordinate(num: number, tileSize: number): number {
         let sign = 1;
-        if (num < 0){
+        if (num < 0) {
             sign = -1;
             num *= -1;
         }

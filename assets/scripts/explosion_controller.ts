@@ -42,6 +42,7 @@ export class ExplosionController extends Component {
         this.collider.off(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         this.collider.off(Contact2DType.END_CONTACT, this.onEndContact, this);
     }
+    
     //------------------------------------------------------------------------------------
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         // console.log("Explosion touched object group" + otherCollider.group);

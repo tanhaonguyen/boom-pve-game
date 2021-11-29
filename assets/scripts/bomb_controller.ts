@@ -17,10 +17,10 @@ const { ccclass, property } = _decorator;
 @ccclass('BombController')
 export class BombController extends Component {
 
-    private collider: Collider2D;
-
     @property({ type: Prefab })
     explosion_prefab: Prefab = null;
+
+    private collider: Collider2D;
 
     //---------------------------------------------------------------------------------
     onLoad() {
@@ -40,6 +40,7 @@ export class BombController extends Component {
     }
     onDestroy() {
         console.log("Go to function onDestroy");
+
         this.collider.off(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         this.collider.off(Contact2DType.END_CONTACT, this.onEndContact, this);
     }
@@ -57,6 +58,7 @@ export class BombController extends Component {
     //------------------------------------------------------------------------------------
     public explode() {
         console.log("Go to function Explode");
+
         let explosion = instantiate(this.explosion_prefab);
         explosion.setParent(this.node.getParent().getParent().getChildByName("explosion"));
         explosion.setPosition(this.node.position);

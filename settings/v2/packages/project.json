@@ -6,24 +6,7 @@
       "height": 640
     }
   },
-  "layer": [
-    {
-      "name": "Floor",
-      "value": 1
-    },
-    {
-      "name": "Fixed_Node",
-      "value": 2
-    },
-    {
-      "name": "Destroyable_Node",
-      "value": 4
-    },
-    {
-      "name": "Explosive_Node",
-      "value": 8
-    }
-  ],
+  "layer": [],
   "physics": {
     "collisionGroups": [
       {
