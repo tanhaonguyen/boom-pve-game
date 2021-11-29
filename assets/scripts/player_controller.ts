@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, SystemEvent, systemEvent, EventKeyboard, KeyCode, Animation, TERRAIN_HEIGHT_BASE, RigidBody, Vec3, RigidBody2D, Vec2 } from 'cc';
+import { _decorator, Component, Node, SystemEvent, systemEvent, EventKeyboard, KeyCode, Animation, TERRAIN_HEIGHT_BASE, RigidBody, Vec3, RigidBody2D, Vec2, Prefab, director, instantiate, math } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -16,23 +16,26 @@ const { ccclass, property } = _decorator;
 
 @ccclass('PlayerMovement')
 export class PlayerMovement extends Component {
-
+    //------------------------------------------------------------------------------
     private arrow_left_down: boolean = false;
     private arrow_right_down: boolean = false;
     private arrow_up_down: boolean = false;
     private arrow_down_down: boolean = false;
+    
     //------------------------------------------------------------------------------
     @property
     boom_amount: number = 1;
     @property
-    moving_speed: number = 10;
-    @property
     moving_offset: number = 20;
+    @property({type: Prefab})
+    bomb_prefab: Prefab = null;
 
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
         systemEvent.on(SystemEvent.EventType.KEY_DOWN, this.onKeyPressed, this);
         systemEvent.on(SystemEvent.EventType.KEY_UP, this.onKeyReleased, this);
+
+        // this.scene = director.getScene();
     }
 
     start() {
@@ -54,7 +57,6 @@ export class PlayerMovement extends Component {
                     this.arrow_left_down = true;
                 }
                 this.node.setPosition(this.node.position.x - this.moving_offset, this.node.position.y);
-                // this.getComponent(RigidBody2D).applyLinearImpulseToCenter(new Vec2(-5, 0), true);
                 break;
             case KeyCode.ARROW_RIGHT:
                 if (!this.arrow_right_down) {
@@ -78,6 +80,15 @@ export class PlayerMovement extends Component {
                 this.node.setPosition(this.node.position.x, this.node.position.y - this.moving_offset);
                 break;
             case KeyCode.SPACE:
+                // console.log("SPACEBAR pressed");
+                let bomb = instantiate(this.bomb_prefab);
+
+                bomb.setParent(this.node.getParent().getChildByName("bomb"));
+
+                let suitableX = this.findBombCoordinate(this.node.position.x, 40);
+                let suitableY = this.findBombCoordinate(this.node.position.y, 40);
+                bomb.setPosition(new Vec3(suitableX, suitableY, 0));
+
                 break;
         }
     }
@@ -117,8 +128,23 @@ export class PlayerMovement extends Component {
 
                 this.arrow_down_down = false;
                 break;
-            case KeyCode.SPACE:
-                break;
+            // case KeyCode.SPACE:
+            //     break;
         }
+    }
+    //------------------------------------------------------------------------------
+    findBombCoordinate(num: number, tileSize: number): number{
+        let sign = 1;
+        if (num < 0){
+            sign = -1;
+            num *= -1;
+        }
+
+        //tileSize = 40 => find k that 40*k + 20 = num
+        let halfTileSize = Math.floor(tileSize / 2);
+        let k = Math.round((num - halfTileSize) / tileSize);
+        let suitableCoordinate = (tileSize * k + halfTileSize) * sign;
+
+        return suitableCoordinate;
     }
 }

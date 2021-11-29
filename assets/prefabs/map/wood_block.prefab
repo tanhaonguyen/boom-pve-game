@@ -13,7 +13,7 @@
   {
     "__type__": "cc.Node",
     "_name": "wood_block",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": null,
     "_children": [],
     "_active": true,
@@ -36,8 +36,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -360,
-      "y": 0,
+      "x": -440,
+      "y": 160,
       "z": 0
     },
     "_lrot": {
@@ -151,7 +151,7 @@
     "enabledContactListener": false,
     "bullet": false,
     "awakeOnLoad": true,
-    "_group": 1,
+    "_group": 16,
     "_type": 0,
     "_allowSleep": true,
     "_gravityScale": 0,
@@ -183,7 +183,7 @@
       "__id__": 9
     },
     "tag": 0,
-    "_group": 1,
+    "_group": 16,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,

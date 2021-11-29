@@ -1,12 +1,12 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "player_left",
+    "_name": "ghost_spawn",
     "_objFlags": 0,
     "_native": "",
     "sample": 60,
-    "speed": 0.8,
-    "wrapMode": 2,
+    "speed": 0.7,
+    "wrapMode": 1,
     "enableTrsBlending": false,
     "_duration": 0.35,
     "_hash": 500763545,
@@ -60,23 +60,23 @@
     ],
     "_values": [
       {
-        "__uuid__": "d45dab80-f8d7-4a5e-8ce1-d632da17351c@f9941",
+        "__uuid__": "5399e37f-545d-4570-ba0a-4620ccec77b9@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "133c2f17-6be5-44f1-b654-dc6fc391bb5d@f9941",
+        "__uuid__": "d1baefbb-08c6-4e4b-b946-c96809fb9303@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "0ddcc7f6-eb8a-4ba8-90ea-008d7adee744@f9941",
+        "__uuid__": "ae72d7bb-0632-4d15-88f5-1c8cc90571f2@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "00a5cfbc-4887-48c5-9ded-341bd73a4ed1@f9941",
+        "__uuid__": "ff2c8d3b-fbb0-456b-a98e-fada24fa6858@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "2ff65dec-5dc7-400e-81b4-9c05b6dc01d4@f9941",
+        "__uuid__": "053ceff4-93b5-4652-b60c-c3a7223c203a@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]

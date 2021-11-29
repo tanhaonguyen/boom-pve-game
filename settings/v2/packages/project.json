@@ -10,6 +10,50 @@
     {
       "name": "Floor",
       "value": 1
+    },
+    {
+      "name": "Fixed_Node",
+      "value": 2
+    },
+    {
+      "name": "Destroyable_Node",
+      "value": 4
+    },
+    {
+      "name": "Explosive_Node",
+      "value": 8
     }
-  ]
+  ],
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "Player"
+      },
+      {
+        "index": 2,
+        "name": "New Bomb"
+      },
+      {
+        "index": 3,
+        "name": "Fixed_Node"
+      },
+      {
+        "index": 4,
+        "name": "Destroyable_Node"
+      },
+      {
+        "index": 5,
+        "name": "Explosive_Node"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 19,
+      "1": 1,
+      "2": 32,
+      "3": 0,
+      "4": 33,
+      "5": 20
+    }
+  }
 }
