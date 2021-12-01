@@ -92,7 +92,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "upper_middle",
+    "_name": "upper-middle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -280,7 +280,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "upper_end",
+    "_name": "upper-end",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -468,7 +468,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lower_middle",
+    "_name": "lower-middle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -656,7 +656,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lower_end",
+    "_name": "lower-end",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -844,7 +844,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "left_middle",
+    "_name": "left-middle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1032,7 +1032,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "left_end",
+    "_name": "left-end",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1220,7 +1220,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "right_middle",
+    "_name": "right-middle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1408,7 +1408,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "right_end",
+    "_name": "right-end",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
