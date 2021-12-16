@@ -1,11 +1,11 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "player_up",
+    "_name": "player-up",
     "_objFlags": 0,
     "_native": "",
     "sample": 60,
-    "speed": 0.8,
+    "speed": 0.6,
     "wrapMode": 2,
     "enableTrsBlending": false,
     "_duration": 0.35,

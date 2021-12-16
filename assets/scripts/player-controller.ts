@@ -28,6 +28,19 @@ export class PlayerMovement extends Component {
     }
 
     update(deltaTime: number) {
+        if (this.arrowLeftDown) {
+            this.node.setPosition(this.node.position.x - this.movingOffset * deltaTime, this.node.position.y);
+        }
+        else if (this.arrowRightDown) {
+            this.node.setPosition(this.node.position.x + this.movingOffset * deltaTime, this.node.position.y);
+        }
+        else if (this.arrowUpDown) {
+            this.node.setPosition(this.node.position.x, this.node.position.y  + this.movingOffset * deltaTime);
+        }
+        else if (this.arrowDownDown) {
+            this.node.setPosition(this.node.position.x, this.node.position.y - this.movingOffset * deltaTime);
+        }
+
     }
 
     onDestroy() {
@@ -37,41 +50,39 @@ export class PlayerMovement extends Component {
     //------------------------------------------------------------------------------
     onKeyPressed(event: EventKeyboard) {
         switch (event.keyCode) {
-
-            case KeyCode.ARROW_LEFT:
-                if (!this.arrowLeftDown) {
-                    this.getComponent(Animation).play("player-left");
-                    this.arrowLeftDown = true;
-                }
-                this.node.setPosition(this.node.position.x - this.movingOffset, this.node.position.y);
+            case KeyCode.ARROW_LEFT:              
+                !this.arrowLeftDown ? this.getComponent(Animation).play("player-left"): undefined;
+                this.arrowLeftDown = true;
+                this.arrowRightDown = false;
+                this.arrowUpDown = false;
+                this.arrowDownDown = false;
                 break;
 
             case KeyCode.ARROW_RIGHT:
-                if (!this.arrowRightDown) {
-                    this.getComponent(Animation).play("player-right");
-                    this.arrowRightDown = true;
-                }
-                this.node.setPosition(this.node.position.x + this.movingOffset, this.node.position.y);
+                !this.arrowRightDown ? this.getComponent(Animation).play("player-right"): undefined;
+                this.arrowLeftDown = false;
+                this.arrowRightDown = true;
+                this.arrowUpDown = false;
+                this.arrowDownDown = false;
                 break;
 
             case KeyCode.ARROW_UP:
-                if (!this.arrowUpDown) {
-                    this.getComponent(Animation).play("player-up");
-                    this.arrowUpDown = true;
-                }
-                this.node.setPosition(this.node.position.x, this.node.position.y + this.movingOffset);
+                !this.arrowUpDown ? this.getComponent(Animation).play("player-up"): undefined;
+                this.arrowLeftDown = false;
+                this.arrowRightDown = false;
+                this.arrowUpDown = true;
+                this.arrowDownDown = false;
                 break;
 
             case KeyCode.ARROW_DOWN:
-                if (!this.arrowDownDown) {
-                    this.getComponent(Animation).play("player-down");
-                    this.arrowDownDown = true;
-                }
-                this.node.setPosition(this.node.position.x, this.node.position.y - this.movingOffset);
+                !this.arrowDownDown ? this.getComponent(Animation).play("player-down"): undefined;
+                this.arrowLeftDown = false;
+                this.arrowRightDown = false;
+                this.arrowUpDown = false;
+                this.arrowDownDown = true;
                 break;
 
             case KeyCode.SPACE:
-                // console.log("SPACEBAR pressed");
                 let bomb = instantiate(this.bombPrefab);
 
                 bomb.setParent(this.node.getParent().getChildByName("bomb"));
