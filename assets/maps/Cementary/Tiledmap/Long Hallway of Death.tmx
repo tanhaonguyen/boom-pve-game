@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.0" orientation="orthogonal" renderorder="right-down" width="17" height="39" tilewidth="40" tileheight="40" infinite="0" nextlayerid="5" nextobjectid="1198">
+<map version="1.4" tiledversion="1.4.0" orientation="orthogonal" renderorder="right-down" width="17" height="39" tilewidth="40" tileheight="40" infinite="0" nextlayerid="5" nextobjectid="1203">
  <tileset firstgid="1" name="Block&amp;Decorate" tilewidth="160" tileheight="160" tilecount="29" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="53">
