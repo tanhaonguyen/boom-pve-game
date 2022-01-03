@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, Camera, director, UITransform, Vec3, Prefab, Size, misc } from 'cc';
+import { PlayerMovement } from '../player-controller';
 const { ccclass, property } = _decorator;
 
 /**
@@ -13,7 +14,7 @@ const { ccclass, property } = _decorator;
  * ManualUrl = https://docs.cocos.com/creator/3.4/manual/en/
  *
  */
- 
+
 @ccclass('Camera')
 export class CameraFollow extends Component {
     // [1]
@@ -23,82 +24,52 @@ export class CameraFollow extends Component {
     // @property
     // serializableDummy = 0;
 
-    start () {
+    start() {
         // [3]
-        this.setCameraPositionAtStart();
+        this.setPlayerPositionAtStart();
     }
 
-    update(){
-        this.scaleTiledMapAndCamera();
+    update() {
         this.CameraFollowObject();
     }
 
-    private tiledMapSize: Size;
-    private scale: number;
-    private orthoHeight: number;
-
-    setCameraPositionAtStart(){
-        //Doc canvas va tiledmap
-        var canvas = this.node.parent;
-        var tiledMap = canvas.getChildByName("TiledMap");
-
-        //Tinh scale dua tren content size cua canvas va tiledmap
-        var canvasSize = canvas.getComponent(UITransform).contentSize;
-        var tiledMapSize = tiledMap.getComponent(UITransform).contentSize;
-        var scale = canvasSize.height*1.0/tiledMapSize.height;
-
-        //Lam tron den 1 chu so thap phan
-        scale = Math.floor(scale*10)/10 - 0.05;
-
-        //Scale tiledmap cho vua voi canvas
-        tiledMap.setScale(new Vec3(scale,scale,scale));
-
-        //Chinh orthoHeight cho vua voi map
-        this.node.getComponent(Camera).orthoHeight = this.node.getComponent(Camera).orthoHeight*scale;
-
-        //Chinh vi tri cua camera xuong duoi chan map
-        var cameraPosition = canvasSize.height/2 - this.node.getComponent(Camera).orthoHeight;
-        this.node.setPosition(this.node.position.x,-cameraPosition);
-
-        this.tiledMapSize = tiledMapSize;
-        this.scale = scale;
-        this.orthoHeight = this.node.getComponent(Camera).orthoHeight;
-    }
-
-    scaleTiledMapAndCamera(){
-        var canvas = this.node.parent;
-        var tiledMap = canvas.getChildByName("TiledMap");
-        
-        tiledMap.setScale(new Vec3(this.scale,this.scale,this.scale));
-        this.node.getComponent(Camera).orthoHeight = this.orthoHeight;
-    }
 
     @property({ type: Node })
     Player: Node;
 
-    CameraFollowObject(){
+    CameraFollowObject() {
 
         let playerPosition = this.Player.getPosition();
         let currentPosition = this.node.getPosition();
 
-        currentPosition.lerp(playerPosition,0.1);
+        currentPosition.lerp(playerPosition, 0.1);
 
         var canvas = this.node.parent;
-        var canvasSize = canvas.getComponent(UITransform).contentSize;
+        var tiledmap = canvas.getChildByName("TiledMap");
 
-        var boundary = canvasSize.height/2-this.orthoHeight;
-        console.log(boundary);
-        currentPosition.y = misc.clampf(playerPosition.y,-boundary,boundary);
+        var canvasSize = canvas.getComponent(UITransform).contentSize;
+        var tiledmapSize = tiledmap.getComponent(UITransform).contentSize;
+
+        var boundaryY = Math.abs(tiledmapSize.height - canvasSize.height)/2 + 40;
+        currentPosition.y = misc.clampf(playerPosition.y, -boundaryY, boundaryY);
         currentPosition.z = 1000;
         currentPosition.x = 0;
 
+        if(tiledmapSize.width>canvasSize.width){
+            var boundaryX = (tiledmapSize.width - canvasSize.width)/2;
+            currentPosition.x = misc.clampf(playerPosition.x, -boundaryX, boundaryX);
+        }
+
         this.node.setPosition(currentPosition);
-        
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+    setPlayerPositionAtStart(){
+        var canvas = this.node.getParent();
+        var tiledmap = canvas.getChildByName("TiledMap");
+
+        var tiledmapSize = tiledmap.getComponent(UITransform).contentSize;
+        this.Player.setPosition(0, -tiledmapSize.height/2 + 5);
+    }
 }
 
 /**

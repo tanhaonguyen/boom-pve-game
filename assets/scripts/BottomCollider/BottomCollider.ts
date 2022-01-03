@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, UITransform, Vec2, Size, TiledMap } from 'cc';
+import { _decorator, Component, Node, UITransform, Vec2, Size, TiledMap, PolygonCollider2D, RigidBody2D, ERigidBody2DType, BoxCollider2D } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -29,10 +29,10 @@ export class BottomCollider extends Component {
         var tiledMap = canvas.getChildByName("TiledMap");
 
         var tiledMapSize = tiledMap.getComponent(UITransform).contentSize;
-        this.node.getComponent(UITransform).setContentSize(new Size(tiledMapSize.width,1));
-        this.node.setScale(tiledMap.scale); 
-        console.log(tiledMap.scale);
-        this.node.setPosition(this.node.position.x, -(tiledMapSize.height/2)*tiledMap.scale.y);
+        
+        this.node.getComponent(UITransform).setContentSize(tiledMapSize.width,1);
+        this.node.getComponent(BoxCollider2D).size = new Size(tiledMapSize.width,1);
+        this.node.setPosition(0, -(tiledMapSize.height/2));
     }
 
     // update (deltaTime: number) {
