@@ -32080,7 +32080,15 @@
   },
   {
     "__type__": "cc.PrefabInfo",
-    "fileId": "f46876e4-e81b-4931-b493-6d367be385e7"
+    "fileId": "f46876e4-e81b-4931-b493-6d367be385e7",
+    "nestedPrefabInstanceRoots": [
+      {
+        "__id__": 8
+      },
+      {
+        "__id__": 970
+      }
+    ]
   },
   {
     "__type__": "cc.SceneGlobals",
@@ -32100,20 +32108,50 @@
   {
     "__type__": "cc.AmbientInfo",
     "_skyColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
+      "__type__": "cc.Vec4",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 0.520833125
     },
     "_skyIllum": 20000,
     "_groundAlbedo": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    }
+      "__type__": "cc.Vec4",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skyColorLDR": {
+      "__type__": "cc.Vec4",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 0.520833125
+    },
+    "_skyColorHDR": {
+      "__type__": "cc.Vec4",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 0.520833125
+    },
+    "_groundAlbedoLDR": {
+      "__type__": "cc.Vec4",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_groundAlbedoHDR": {
+      "__type__": "cc.Vec4",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skyIllumLDR": 0.78125,
+    "_skyIllumHDR": 20000
   },
   {
     "__type__": "cc.ShadowsInfo",
@@ -32148,23 +32186,29 @@
       "x": 512,
       "y": 512
     },
-    "_saturation": 0.75
+    "_saturation": 0.75,
+    "_firstSetCSM": false
   },
   {
     "__type__": "cc.SkyboxInfo",
     "_envmap": null,
-    "_isRGBE": false,
     "_enabled": false,
-    "_useIBL": false
+    "_useIBL": false,
+    "_useHDR": true,
+    "_envmapLDR": null,
+    "_envmapHDR": null,
+    "_diffuseMapLDR": null,
+    "_diffuseMapHDR": null,
+    "_applyDiffuseMap": false
   },
   {
     "__type__": "cc.FogInfo",
     "_type": 0,
     "_fogColor": {
       "__type__": "cc.Color",
-      "r": 239,
-      "g": 239,
-      "b": 239,
+      "r": 246,
+      "g": 246,
+      "b": 246,
       "a": 255
     },
     "_enabled": false,
@@ -32173,6 +32217,7 @@
     "_fogEnd": 300,
     "_fogAtten": 5,
     "_fogTop": 1.5,
-    "_fogRange": 1.2
+    "_fogRange": 1.2,
+    "_accurate": false
   }
 ]

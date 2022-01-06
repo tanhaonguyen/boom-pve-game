@@ -1,12 +1,12 @@
 {
-  "name": "boom-pve-game",
-  "type": "3d",
-  "uuid": "dcd79890-369a-4115-b7d9-3c79156d4664",
-  "version": "3.3.1",
   "creator": {
-    "version": "3.3.1"
+    "version": "3.4.0"
   },
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "name": "boom-pve-game",
+  "type": "3d",
+  "uuid": "dcd79890-369a-4115-b7d9-3c79156d4664",
+  "version": "3.4.0"
 }
