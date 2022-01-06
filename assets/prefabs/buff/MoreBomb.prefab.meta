@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "3265c866-38c5-4a73-a6b2-1ffd34ddcef6",
+  "uuid": "65dd6848-983d-4863-badf-cf3da1d67b33",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "turtle"
+    "syncNodeName": "MoreBomb"
   }
 }

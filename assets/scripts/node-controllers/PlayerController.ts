@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, SystemEvent, systemEvent, EventKeyboard, KeyCode, Animation, TERRAIN_HEIGHT_BASE, RigidBody, Vec3, RigidBody2D, Vec2, Prefab, director, instantiate, math } from 'cc';
+import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerMovement')
@@ -20,8 +20,8 @@ export class PlayerMovement extends Component {
 
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
-        systemEvent.on(SystemEvent.EventType.KEY_DOWN, this.onKeyPressed, this);
-        systemEvent.on(SystemEvent.EventType.KEY_UP, this.onKeyReleased, this);
+        input.on(Input.EventType.KEY_DOWN, this.onKeyPressed, this);
+        input.on(Input.EventType.KEY_UP, this.onKeyReleased, this);
     }
 
     start() {
@@ -44,8 +44,8 @@ export class PlayerMovement extends Component {
     }
 
     onDestroy() {
-        systemEvent.off(SystemEvent.EventType.KEY_DOWN, this.onKeyPressed, this);
-        systemEvent.off(SystemEvent.EventType.KEY_UP, this.onKeyReleased, this);
+        input.off(Input.EventType.KEY_DOWN, this.onKeyPressed, this);
+        input.off(Input.EventType.KEY_UP, this.onKeyReleased, this);
     }
     //------------------------------------------------------------------------------
     onKeyPressed(event: EventKeyboard) {
@@ -85,7 +85,7 @@ export class PlayerMovement extends Component {
             case KeyCode.SPACE:
                 let bomb = instantiate(this.bombPrefab);
 
-                bomb.setParent(this.node.getParent().getChildByName("bomb"));
+                bomb.setParent(this.node.getParent().getChildByName("Bomb"));
 
                 let suitableX = this.findBombCoordinate(this.node.position.x, 40);
                 let suitableY = this.findBombCoordinate(this.node.position.y, 40);

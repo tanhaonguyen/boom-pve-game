@@ -48,7 +48,7 @@ export class BombController extends Component {
         console.log("Go to function Explode");
 
         let explosion = instantiate(this.explosionPrefab);
-        explosion.setParent(this.node.getParent().getParent().getChildByName("explosion"));
+        explosion.setParent(this.node.getParent().getParent().getChildByName("Explosion"));
         explosion.setPosition(this.node.position);
 
         this.node.destroy();

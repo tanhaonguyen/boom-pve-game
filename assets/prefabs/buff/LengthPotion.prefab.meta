@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "65dd6848-983d-4863-badf-cf3da1d67b33",
+  "uuid": "78f5d942-fe57-433b-b72b-3b22827ba5c3",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "bomb"
+    "syncNodeName": "LengthPotion"
   }
 }

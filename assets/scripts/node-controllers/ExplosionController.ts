@@ -1,6 +1,5 @@
 
 import { _decorator, Component, Node, Collider2D, Contact2DType, IPhysics2DContact } from 'cc';
-import { BombController } from './bomb-controller';
 const { ccclass, property } = _decorator;
 
 @ccclass('ExplosionController')

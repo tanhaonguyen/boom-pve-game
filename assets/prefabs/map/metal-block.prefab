@@ -14,6 +14,7 @@
     "__type__": "cc.Node",
     "_name": "metal-block",
     "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [],
     "_active": true,
@@ -140,6 +141,7 @@
     "__type__": "cc.RigidBody2D",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -153,7 +155,7 @@
     "_group": 1,
     "_type": 0,
     "_allowSleep": true,
-    "_gravityScale": 0,
+    "_gravityScale": 1,
     "_linearDamping": 0,
     "_angularDamping": 0,
     "_linearVelocity": {
@@ -167,7 +169,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "49ylNqvG9I8K+AL4uzJl1i"
+    "fileId": "ebYq1FulBAgoyvTZTiqyUt"
   },
   {
     "__type__": "cc.BoxCollider2D",

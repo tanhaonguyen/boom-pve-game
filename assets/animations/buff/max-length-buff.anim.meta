@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "a00ee441-1b27-49c3-a78e-59caa2fab2e1",
+  "uuid": "af06eacc-4e58-458d-98d7-ffa40fb169cb",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "turtle"
+    "name": "max-length-buff"
   }
 }

@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "f20c5233-b94e-4071-843c-098f75c743c9",
+  "uuid": "4b9f347e-df41-402f-9d7e-66dc731494ab",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "dark-flame-bomb"
+    "syncNodeName": "MaxLengthBuff"
   }
 }

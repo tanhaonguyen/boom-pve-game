@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "black-transparent-bg",
+    "_name": "BlackTransparentBG",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],

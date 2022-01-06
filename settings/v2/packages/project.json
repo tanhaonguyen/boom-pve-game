@@ -15,28 +15,33 @@
       },
       {
         "index": 2,
-        "name": "New Bomb"
+        "name": "Buff"
       },
       {
         "index": 3,
-        "name": "Fixed_Node"
+        "name": " deleted 2"
       },
       {
         "index": 4,
-        "name": "Destroyable_Node"
+        "name": "deleted 3"
       },
       {
         "index": 5,
-        "name": "Explosive_Node"
+        "name": "deleted 4"
+      },
+      {
+        "index": 6,
+        "name": "deleted 5"
       }
     ],
     "collisionMatrix": {
-      "0": 19,
+      "0": 3,
       "1": 1,
-      "2": 32,
+      "2": 0,
       "3": 0,
-      "4": 33,
-      "5": 20
+      "4": 0,
+      "5": 0,
+      "6": 0
     }
   }
 }
