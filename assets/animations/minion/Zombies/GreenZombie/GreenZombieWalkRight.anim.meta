@@ -1,0 +1,13 @@
+{
+  "ver": "2.0.3",
+  "importer": "animation-clip",
+  "imported": true,
+  "uuid": "0ee3d80d-e1b2-47b3-b0aa-1dbdfd954203",
+  "files": [
+    ".cconb"
+  ],
+  "subMetas": {},
+  "userData": {
+    "name": "GreenZombieWalkRight"
+  }
+}
