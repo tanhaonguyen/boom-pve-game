@@ -11,16 +11,16 @@
     ],
     "_variables": {
       "isMoving": {
-        "__id__": 49
+        "__id__": 47
       },
       "lookX": {
-        "__id__": 50
+        "__id__": 48
       },
       "lookY": {
-        "__id__": 51
+        "__id__": 49
       },
       "isAttacking": {
-        "__id__": 52
+        "__id__": 50
       }
     }
   },
@@ -63,7 +63,7 @@
         "__id__": 26
       },
       {
-        "__id__": 34
+        "__id__": 29
       }
     ],
     "_transitions": [
@@ -74,16 +74,13 @@
         "__id__": 38
       },
       {
-        "__id__": 39
+        "__id__": 40
       },
       {
-        "__id__": 42
+        "__id__": 41
       },
       {
-        "__id__": 45
-      },
-      {
-        "__id__": 47
+        "__id__": 44
       }
     ],
     "_entryState": {
@@ -99,7 +96,7 @@
   {
     "__type__": "cc.animation.State",
     "__editorExtras__": {
-      "centerX": -206.55555555555557,
+      "centerX": -237.66666666666669,
       "centerY": -108
     },
     "name": "Entry"
@@ -321,8 +318,8 @@
   {
     "__type__": "cc.animation.Motion",
     "__editorExtras__": {
-      "centerX": -203.11458333333343,
-      "centerY": -29.225713094075502
+      "centerX": -238.67013888888897,
+      "centerY": -31.44793531629773
     },
     "name": "GreenZombieRise",
     "_components": [],
@@ -352,102 +349,16 @@
   {
     "__type__": "cc.animation.Motion",
     "__editorExtras__": {
-      "centerX": -50.33680555555554,
-      "centerY": -31.44793531629776
-    },
-    "name": "Idle Blend 1D",
-    "_components": [],
-    "motion": {
-      "__id__": 27
-    },
-    "speed": {
-      "__id__": 33
-    }
-  },
-  {
-    "__type__": "cc.animation.AnimationBlend1D",
-    "__editorExtras__": {
-      "centerX": 0,
-      "centerY": 0,
-      "autoThreshold": false,
-      "viewport": {
-        "scale": 1,
-        "top": 0,
-        "left": 0
-      }
-    },
-    "name": "Blend 1D",
-    "_items": [
-      {
-        "__id__": 28
-      },
-      {
-        "__id__": 30
-      }
-    ],
-    "param": {
-      "__id__": 32
-    }
-  },
-  {
-    "__type__": "cc.animation.AnimationBlend1DItem",
-    "motion": {
-      "__id__": 29
-    },
-    "threshold": -1
-  },
-  {
-    "__type__": "cc.animation.ClipMotion",
-    "__editorExtras__": {
-      "centerX": -214,
-      "centerY": -6
-    },
-    "clip": {
-      "__uuid__": "7f49c61f-d6cc-4331-b8e3-edd07145c9d7",
-      "__expectedType__": "cc.AnimationClip"
-    }
-  },
-  {
-    "__type__": "cc.animation.AnimationBlend1DItem",
-    "motion": {
-      "__id__": 31
-    },
-    "threshold": 1
-  },
-  {
-    "__type__": "cc.animation.ClipMotion",
-    "__editorExtras__": {
-      "centerX": 210,
-      "centerY": 10
-    },
-    "clip": {
-      "__uuid__": "9bb81555-5faf-4f6b-88a1-952f04835118",
-      "__expectedType__": "cc.AnimationClip"
-    }
-  },
-  {
-    "__type__": "cc.animation.BindableNumber",
-    "variable": "lookX",
-    "value": 0
-  },
-  {
-    "__type__": "cc.animation.BindableNumber",
-    "variable": "",
-    "value": 1
-  },
-  {
-    "__type__": "cc.animation.Motion",
-    "__editorExtras__": {
       "centerX": -4.225694444444457,
       "centerY": 98.55206468370227
     },
     "name": "GreenZombieAttack",
     "_components": [],
     "motion": {
-      "__id__": 35
+      "__id__": 27
     },
     "speed": {
-      "__id__": 36
+      "__id__": 28
     }
   },
   {
@@ -467,6 +378,92 @@
     "value": 1
   },
   {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -50.33680555555554,
+      "centerY": -42.5590464274089
+    },
+    "name": "Blend 1D",
+    "_components": [],
+    "motion": {
+      "__id__": 30
+    },
+    "speed": {
+      "__id__": 36
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1D",
+    "__editorExtras__": {
+      "centerX": 0,
+      "centerY": 0,
+      "autoThreshold": true,
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "name": "Blend 1D",
+    "_items": [
+      {
+        "__id__": 31
+      },
+      {
+        "__id__": 33
+      }
+    ],
+    "param": {
+      "__id__": 35
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 32
+    },
+    "threshold": -1
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": -227,
+      "centerY": -2
+    },
+    "clip": {
+      "__uuid__": "7f49c61f-d6cc-4331-b8e3-edd07145c9d7",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 34
+    },
+    "threshold": 1
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": 237,
+      "centerY": -4
+    },
+    "clip": {
+      "__uuid__": "9bb81555-5faf-4f6b-88a1-952f04835118",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "lookX",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "",
+    "value": 1
+  },
+  {
     "__type__": "cc.animation.Transition",
     "from": {
       "__id__": 3
@@ -479,10 +476,32 @@
   {
     "__type__": "cc.animation.AnimationTransition",
     "from": {
-      "__id__": 23
+      "__id__": 6
     },
     "to": {
       "__id__": 26
+    },
+    "conditions": [
+      {
+        "__id__": 39
+      }
+    ],
+    "duration": 0,
+    "relativeDuration": false,
+    "exitConditionEnabled": false,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "isAttacking"
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 23
+    },
+    "to": {
+      "__id__": 29
     },
     "conditions": [],
     "duration": 0.3,
@@ -493,14 +512,14 @@
   {
     "__type__": "cc.animation.AnimationTransition",
     "from": {
-      "__id__": 26
+      "__id__": 29
     },
     "to": {
       "__id__": 6
     },
     "conditions": [
       {
-        "__id__": 40
+        "__id__": 42
       }
     ],
     "duration": 0,
@@ -512,7 +531,7 @@
     "__type__": "cc.animation.UnaryCondition",
     "operator": 0,
     "operand": {
-      "__id__": 41
+      "__id__": 43
     }
   },
   {
@@ -526,11 +545,11 @@
       "__id__": 6
     },
     "to": {
-      "__id__": 26
+      "__id__": 29
     },
     "conditions": [
       {
-        "__id__": 43
+        "__id__": 45
       }
     ],
     "duration": 0,
@@ -542,57 +561,13 @@
     "__type__": "cc.animation.UnaryCondition",
     "operator": 1,
     "operand": {
-      "__id__": 44
+      "__id__": 46
     }
   },
   {
     "__type__": "cc.animation.BindableBoolean",
     "variable": "isMoving",
     "value": false
-  },
-  {
-    "__type__": "cc.animation.AnimationTransition",
-    "from": {
-      "__id__": 26
-    },
-    "to": {
-      "__id__": 34
-    },
-    "conditions": [
-      {
-        "__id__": 46
-      }
-    ],
-    "duration": 0,
-    "relativeDuration": true,
-    "exitConditionEnabled": false,
-    "_exitCondition": 1
-  },
-  {
-    "__type__": "cc.animation.TriggerCondition",
-    "trigger": "isAttacking"
-  },
-  {
-    "__type__": "cc.animation.AnimationTransition",
-    "from": {
-      "__id__": 6
-    },
-    "to": {
-      "__id__": 34
-    },
-    "conditions": [
-      {
-        "__id__": 48
-      }
-    ],
-    "duration": 0,
-    "relativeDuration": false,
-    "exitConditionEnabled": false,
-    "_exitCondition": 1
-  },
-  {
-    "__type__": "cc.animation.TriggerCondition",
-    "trigger": "isAttacking"
   },
   {
     "__type__": "cc.animation.Variable",
