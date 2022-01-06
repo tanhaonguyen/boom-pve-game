@@ -26,7 +26,7 @@ export class CameraFollow extends Component {
 
     start() {
         // [3]
-        // this.setPlayerPositionAtStart();
+        this.setPlayerPositionAtStart();
     }
 
     update() {
