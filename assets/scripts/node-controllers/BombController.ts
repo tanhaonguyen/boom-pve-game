@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, PolygonCollider2D, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, instantiate, Prefab, director, ExtrapolationMode } from 'cc';
+import { PlayerController } from './PlayerController';
 const { ccclass, property } = _decorator;
 
 @ccclass('BombController')
@@ -7,7 +8,8 @@ export class BombController extends Component {
 
     @property({ type: Prefab })
     explosionPrefab: Prefab = undefined;
-
+    
+    private player: PlayerController = undefined;
     private collider: Collider2D = undefined;
 
     // ---------------------------------------------------------------------------------
@@ -21,6 +23,7 @@ export class BombController extends Component {
 
     start() {
         this.schedule(this.explode, 3);
+        this.player = PlayerController.instance;
     }
 
     update(deltaTime: number) {
@@ -45,12 +48,13 @@ export class BombController extends Component {
 
     // ------------------------------------------------------------------------------------
     public explode() {
-        console.log("Go to function Explode");
+        // console.log("Go to function Explode");
 
         let explosion = instantiate(this.explosionPrefab);
         explosion.setParent(this.node.getParent().getParent().getChildByName("Explosion"));
         explosion.setPosition(this.node.position);
 
+        this.player.updatePlacedBombAmount();
         this.node.destroy();
     }
 }

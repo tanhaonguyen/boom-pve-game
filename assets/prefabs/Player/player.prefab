@@ -43,8 +43,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -80,
-      "y": 140,
+      "x": -230,
+      "y": -120,
       "z": 0
     },
     "_lrot": {
@@ -209,12 +209,13 @@
     "__prefab": {
       "__id__": 9
     },
-    "boomAmount": 0,
-    "movingOffset": 200,
     "bombPrefab": {
       "__uuid__": "f20c5233-b94e-4071-843c-098f75c743c9",
       "__expectedType__": "cc.Prefab"
     },
+    "maxBombAmount": 10,
+    "maxSpeed": 1000,
+    "maxBombLength": 10,
     "_id": ""
   },
   {

@@ -14,6 +14,7 @@
     "__type__": "cc.Node",
     "_name": "Explosion",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [
       {
@@ -64,8 +65,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -220,
-      "y": -60,
+      "x": 161,
+      "y": -147,
       "z": 0
     },
     "_lrot": {

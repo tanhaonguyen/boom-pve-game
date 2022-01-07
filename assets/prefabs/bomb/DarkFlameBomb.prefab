@@ -14,6 +14,7 @@
     "__type__": "cc.Node",
     "_name": "DarkFlameBomb",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [],
     "_active": true,
@@ -42,8 +43,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 143,
-      "y": -139,
+      "x": -238,
+      "y": 5,
       "z": 0
     },
     "_lrot": {
@@ -183,8 +184,8 @@
     "enabledContactListener": true,
     "bullet": false,
     "awakeOnLoad": false,
-    "_group": 4,
-    "_type": 3,
+    "_group": 8,
+    "_type": 0,
     "_allowSleep": true,
     "_gravityScale": 0,
     "_linearDamping": 0,
@@ -215,10 +216,10 @@
       "__id__": 11
     },
     "tag": 0,
-    "_group": 4,
+    "_group": 8,
     "_density": 1,
     "_sensor": false,
-    "_friction": 0.2,
+    "_friction": 0,
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",

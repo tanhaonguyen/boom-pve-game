@@ -13,7 +13,8 @@
   {
     "__type__": "cc.Node",
     "_name": "green-chest",
-    "_objFlags": 0,
+    "_objFlags": 512,
+    "__editorExtras__": {},
     "_parent": null,
     "_children": [],
     "_active": true,
@@ -36,8 +37,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -160,
-      "y": -320,
+      "x": -480,
+      "y": 160,
       "z": 0
     },
     "_lrot": {
@@ -147,7 +148,7 @@
     },
     "enabledContactListener": false,
     "bullet": false,
-    "awakeOnLoad": true,
+    "awakeOnLoad": false,
     "_group": 1,
     "_type": 0,
     "_allowSleep": true,

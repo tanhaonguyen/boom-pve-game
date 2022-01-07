@@ -13,7 +13,7 @@
   {
     "__type__": "cc.Node",
     "_name": "o-block",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "__editorExtras__": {},
     "_parent": null,
     "_children": [],
@@ -37,8 +37,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -120,
-      "y": -120,
+      "x": -80,
+      "y": 40,
       "z": 0
     },
     "_lrot": {
@@ -144,13 +144,13 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": {
       "__id__": 7
     },
     "enabledContactListener": false,
     "bullet": false,
-    "awakeOnLoad": true,
+    "awakeOnLoad": false,
     "_group": 1,
     "_type": 0,
     "_allowSleep": true,

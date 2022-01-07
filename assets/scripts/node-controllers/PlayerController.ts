@@ -1,44 +1,83 @@
 
-import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input } from 'cc';
+import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('PlayerMovement')
-export class PlayerMovement extends Component {
+enum Buff {
+    LengthPotion,
+    MaxLengthBuff,
+    MoreBomb,
+    Speed
+}
+
+enum ColliderGroup {
+    DEFAULT = 1,
+    Player = 2,
+    Buff = 4,
+    Bomb = 8,
+}
+
+@ccclass('PlayerController')
+export class PlayerController extends Component {
+
+    public static _instance: PlayerController = undefined;
+
+    public static get instance(): PlayerController {
+        return PlayerController._instance;
+    }
+
+    //------------------------------------------------------------------------------
+    private _bombAmount: number = 1;
+    private _placedBomb: number = 0;
+    private _speed: number = 100;
+    private _bombLength: number = 1;
+
+    //------------------------------------------------------------------------------
+    @property(Prefab)
+    bombPrefab: Prefab = undefined;
+
+    @property
+    maxBombAmount: number = 10;
+    @property
+    maxSpeed: number = 1000;
+    @property
+    maxBombLength: number = 10;
+
     //------------------------------------------------------------------------------
     private arrowLeftDown: boolean = false;
     private arrowRightDown: boolean = false;
     private arrowUpDown: boolean = false;
-    private arrowDownDown: boolean = false;
+    private arrowDownDown: boolean = false;W
 
-    //------------------------------------------------------------------------------
-    @property
-    boomAmount: number = 0;
-    @property
-    movingOffset: number = 0;
-    @property({ type: Prefab })
-    bombPrefab: Prefab = undefined;
 
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
+        PlayerController._instance = this;
+
         input.on(Input.EventType.KEY_DOWN, this.onKeyPressed, this);
         input.on(Input.EventType.KEY_UP, this.onKeyReleased, this);
     }
 
     start() {
+        let collider: Collider2D = this.node.getComponent(Collider2D);
+        if (collider) {
+            collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
+        }
+
+
     }
 
     update(deltaTime: number) {
         if (this.arrowLeftDown) {
-            this.node.setPosition(this.node.position.x - this.movingOffset * deltaTime, this.node.position.y);
+            this.node.setPosition(this.node.position.x - this._speed * deltaTime, this.node.position.y);
         }
         else if (this.arrowRightDown) {
-            this.node.setPosition(this.node.position.x + this.movingOffset * deltaTime, this.node.position.y);
+            this.node.setPosition(this.node.position.x + this._speed * deltaTime, this.node.position.y);
         }
         else if (this.arrowUpDown) {
-            this.node.setPosition(this.node.position.x, this.node.position.y  + this.movingOffset * deltaTime);
+            this.node.setPosition(this.node.position.x, this.node.position.y + this._speed * deltaTime);
         }
         else if (this.arrowDownDown) {
-            this.node.setPosition(this.node.position.x, this.node.position.y - this.movingOffset * deltaTime);
+            this.node.setPosition(this.node.position.x, this.node.position.y - this._speed * deltaTime);
         }
 
     }
@@ -47,11 +86,12 @@ export class PlayerMovement extends Component {
         input.off(Input.EventType.KEY_DOWN, this.onKeyPressed, this);
         input.off(Input.EventType.KEY_UP, this.onKeyReleased, this);
     }
-    //------------------------------------------------------------------------------
-    onKeyPressed(event: EventKeyboard) {
+
+    //----------------------------Trigger-function----------------------------------------
+    onKeyPressed(event: EventKeyboard): void {
         switch (event.keyCode) {
-            case KeyCode.ARROW_LEFT:              
-                !this.arrowLeftDown ? this.getComponent(Animation).play("player-left"): undefined;
+            case KeyCode.ARROW_LEFT:
+                !this.arrowLeftDown ? this.getComponent(Animation).play("player-left") : undefined;
                 this.arrowLeftDown = true;
                 this.arrowRightDown = false;
                 this.arrowUpDown = false;
@@ -59,7 +99,7 @@ export class PlayerMovement extends Component {
                 break;
 
             case KeyCode.ARROW_RIGHT:
-                !this.arrowRightDown ? this.getComponent(Animation).play("player-right"): undefined;
+                !this.arrowRightDown ? this.getComponent(Animation).play("player-right") : undefined;
                 this.arrowLeftDown = false;
                 this.arrowRightDown = true;
                 this.arrowUpDown = false;
@@ -67,7 +107,7 @@ export class PlayerMovement extends Component {
                 break;
 
             case KeyCode.ARROW_UP:
-                !this.arrowUpDown ? this.getComponent(Animation).play("player-up"): undefined;
+                !this.arrowUpDown ? this.getComponent(Animation).play("player-up") : undefined;
                 this.arrowLeftDown = false;
                 this.arrowRightDown = false;
                 this.arrowUpDown = true;
@@ -75,7 +115,7 @@ export class PlayerMovement extends Component {
                 break;
 
             case KeyCode.ARROW_DOWN:
-                !this.arrowDownDown ? this.getComponent(Animation).play("player-down"): undefined;
+                !this.arrowDownDown ? this.getComponent(Animation).play("player-down") : undefined;
                 this.arrowLeftDown = false;
                 this.arrowRightDown = false;
                 this.arrowUpDown = false;
@@ -83,18 +123,22 @@ export class PlayerMovement extends Component {
                 break;
 
             case KeyCode.SPACE:
-                let bomb = instantiate(this.bombPrefab);
+                if (this._placedBomb < this._bombAmount) {
+                    ++this._placedBomb;
 
-                bomb.setParent(this.node.getParent().getChildByName("Bomb"));
+                    let bomb = instantiate(this.bombPrefab);
 
-                let suitableX = this.findBombCoordinate(this.node.position.x, 40);
-                let suitableY = this.findBombCoordinate(this.node.position.y, 40);
-                bomb.setPosition(new Vec3(suitableX, suitableY, 0));
+                    bomb.setParent(this.node.getParent().getChildByName("Bomb"));
+    
+                    let suitableX = this.findBombCoordinate(this.node.position.x, 40);
+                    let suitableY = this.findBombCoordinate(this.node.position.y, 40);
+                    bomb.setPosition(new Vec3(suitableX, suitableY, 0));
+                }
                 break;
         }
     }
 
-    onKeyReleased(event: EventKeyboard) {
+    onKeyReleased(event: EventKeyboard): void {
         let other_key_down_exist = false;
         switch (event.keyCode) {
             case KeyCode.ARROW_LEFT:
@@ -129,11 +173,21 @@ export class PlayerMovement extends Component {
 
                 this.arrowDownDown = false;
                 break;
-            // case KeyCode.SPACE:
-            //     break;
         }
     }
-    //------------------------------------------------------------------------------
+
+    onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null): void {
+        console.log("Player begin contact with", otherCollider.group);
+
+        switch (otherCollider.group) {
+
+            case ColliderGroup.Buff:
+                this.updatePlayerStats(otherCollider.tag);
+                otherCollider.node.destroy();
+                break;
+        }
+    }
+    //------------------------Funtional-functions------------------------------
     findBombCoordinate(num: number, tileSize: number): number {
         let sign = 1;
         if (num < 0) {
@@ -147,5 +201,26 @@ export class PlayerMovement extends Component {
         let suitableCoordinate = (tileSize * k + halfTileSize) * sign;
 
         return suitableCoordinate;
+    }
+
+    updatePlacedBombAmount(): void {
+        --this._placedBomb;
+    }
+
+    updatePlayerStats(buffTag: number): void {
+        switch (buffTag) {
+            case Buff.LengthPotion:
+                this._bombLength = (this._bombLength < this.maxBombLength) ? this._bombLength + 1 : this._bombLength;
+                break;
+            case Buff.MaxLengthBuff:
+                this._bombLength = this.maxBombLength;
+                break;
+            case Buff.MoreBomb:
+                this._bombAmount = (this._bombAmount < this.maxBombAmount) ? this._bombAmount + 1 : this._bombAmount;
+                break;
+            case Buff.Speed:
+                this._speed = (this._speed < this.maxSpeed) ? this._speed + 50 : this._speed;
+                break;
+        }
     }
 }

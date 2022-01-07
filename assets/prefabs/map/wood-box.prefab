@@ -13,7 +13,7 @@
   {
     "__type__": "cc.Node",
     "_name": "wood-box",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "__editorExtras__": {},
     "_parent": null,
     "_children": [],
@@ -142,13 +142,13 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": {
       "__id__": 7
     },
     "enabledContactListener": false,
     "bullet": false,
-    "awakeOnLoad": true,
+    "awakeOnLoad": false,
     "_group": 1,
     "_type": 0,
     "_allowSleep": true,
