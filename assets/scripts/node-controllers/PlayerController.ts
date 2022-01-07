@@ -1,5 +1,6 @@
 
 import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D } from 'cc';
+import { BombController } from './BombController';
 const { ccclass, property } = _decorator;
 
 enum Buff {
@@ -48,7 +49,6 @@ export class PlayerController extends Component {
     private arrowUpDown: boolean = false;
     private arrowDownDown: boolean = false;W
 
-
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
         PlayerController._instance = this;
@@ -90,7 +90,7 @@ export class PlayerController extends Component {
     //----------------------------Trigger-function----------------------------------------
     onKeyPressed(event: EventKeyboard): void {
         switch (event.keyCode) {
-            case KeyCode.ARROW_LEFT:
+            case KeyCode.ARROW_LEFT: // Move left
                 !this.arrowLeftDown ? this.getComponent(Animation).play("player-left") : undefined;
                 this.arrowLeftDown = true;
                 this.arrowRightDown = false;
@@ -98,7 +98,7 @@ export class PlayerController extends Component {
                 this.arrowDownDown = false;
                 break;
 
-            case KeyCode.ARROW_RIGHT:
+            case KeyCode.ARROW_RIGHT: // Move right
                 !this.arrowRightDown ? this.getComponent(Animation).play("player-right") : undefined;
                 this.arrowLeftDown = false;
                 this.arrowRightDown = true;
@@ -106,7 +106,7 @@ export class PlayerController extends Component {
                 this.arrowDownDown = false;
                 break;
 
-            case KeyCode.ARROW_UP:
+            case KeyCode.ARROW_UP: // Move up
                 !this.arrowUpDown ? this.getComponent(Animation).play("player-up") : undefined;
                 this.arrowLeftDown = false;
                 this.arrowRightDown = false;
@@ -114,7 +114,7 @@ export class PlayerController extends Component {
                 this.arrowDownDown = false;
                 break;
 
-            case KeyCode.ARROW_DOWN:
+            case KeyCode.ARROW_DOWN: // Move down
                 !this.arrowDownDown ? this.getComponent(Animation).play("player-down") : undefined;
                 this.arrowLeftDown = false;
                 this.arrowRightDown = false;
@@ -122,17 +122,31 @@ export class PlayerController extends Component {
                 this.arrowDownDown = true;
                 break;
 
-            case KeyCode.SPACE:
+            case KeyCode.SPACE: // Place the bomb
+                
                 if (this._placedBomb < this._bombAmount) {
-                    ++this._placedBomb;
 
-                    let bomb = instantiate(this.bombPrefab);
-
-                    bomb.setParent(this.node.getParent().getChildByName("Bomb"));
-    
                     let suitableX = this.findBombCoordinate(this.node.position.x, 40);
                     let suitableY = this.findBombCoordinate(this.node.position.y, 40);
-                    bomb.setPosition(new Vec3(suitableX, suitableY, 0));
+
+                    let occupied: boolean = false;
+                  
+                    for (let coor of BombController.occupyCoor) {
+                        if (coor.x === suitableX && coor.y === suitableY) {
+                            occupied = true;
+                            break;
+                        }
+                    }
+
+                    if (!occupied) {  
+                        ++this._placedBomb;
+
+                        let bomb = instantiate(this.bombPrefab);
+                        bomb.setParent(this.node.getParent().getChildByName("Bomb"));
+                        bomb.setPosition(new Vec3(suitableX, suitableY, 0));
+
+                        BombController.pushPositionToQueue(suitableX, suitableY); // Mark this coordinate is occupied
+                    }
                 }
                 break;
         }
@@ -219,7 +233,7 @@ export class PlayerController extends Component {
                 this._bombAmount = (this._bombAmount < this.maxBombAmount) ? this._bombAmount + 1 : this._bombAmount;
                 break;
             case Buff.Speed:
-                this._speed = (this._speed < this.maxSpeed) ? this._speed + 50 : this._speed;
+                this._speed = (this._speed < this.maxSpeed) ? this._speed + 25 : this._speed;
                 break;
         }
     }

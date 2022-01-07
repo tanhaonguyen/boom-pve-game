@@ -3,9 +3,17 @@ import { _decorator, Component, Node, PolygonCollider2D, Collider2D, Contact2DTy
 import { PlayerController } from './PlayerController';
 const { ccclass, property } = _decorator;
 
+type Coordinate = {
+    x: number,
+    y: number
+}
+
 @ccclass('BombController')
 export class BombController extends Component {
 
+    public static occupyCoor: Coordinate[] = [];
+
+    // ---------------------------------------------------------------------------------
     @property({ type: Prefab })
     explosionPrefab: Prefab = undefined;
     
@@ -27,13 +35,20 @@ export class BombController extends Component {
     }
 
     update(deltaTime: number) {
-        // this.getComponent(PolygonCollider2D).group = "";
     }
     onDestroy() {
         console.log("Go to function onDestroy");
 
         this.collider.off(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         this.collider.off(Contact2DType.END_CONTACT, this.onEndContact, this);
+    }
+    // ---------------------------------------------------------------------------------
+    public static pushPositionToQueue(xVal: number, yVal: number): void {
+        BombController.occupyCoor.push({x: xVal, y: yVal});
+    }
+
+    public static popPositionFromQueue(): void {
+        BombController.occupyCoor.shift();
     }
 
     // ------------------------------------------------------------------------------------
@@ -54,7 +69,8 @@ export class BombController extends Component {
         explosion.setParent(this.node.getParent().getParent().getChildByName("Explosion"));
         explosion.setPosition(this.node.position);
 
-        this.player.updatePlacedBombAmount();
+        this.player.updatePlacedBombAmount(); // Decrease the amount of bomb that has been placed by player
+        BombController.popPositionFromQueue(); // Pop the position of the bomb that has just exploded
         this.node.destroy();
     }
 }
