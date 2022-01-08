@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Explosion",
+    "_name": "explosion",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,

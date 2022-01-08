@@ -191,7 +191,7 @@ export class PlayerController extends Component {
     }
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null): void {
-        console.log("Player begin contact with", otherCollider.group);
+        // console.log("Player begin contact with", otherCollider.group);
 
         switch (otherCollider.group) {
 
