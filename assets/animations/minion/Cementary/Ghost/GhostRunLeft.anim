@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "BatLeft",
+    "_name": "GhostRunLeft",
     "_objFlags": 0,
     "_native": "",
     "sample": 60,
@@ -59,19 +59,19 @@
     ],
     "_values": [
       {
-        "__uuid__": "93763180-f2cd-40ff-861a-0777ba1f3f5d@f9941",
+        "__uuid__": "89e711ca-1ba8-423c-abfe-28235c9b3788@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "1821cd93-de70-4b19-b57d-d351b59e78fc@f9941",
+        "__uuid__": "ccb4deab-9396-49ea-bb74-666f9b1c7c86@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "cba26973-e00d-4777-8348-251bf7ecab76@f9941",
+        "__uuid__": "b969c4ae-dcb0-40d1-aa13-dee26263649d@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "93763180-f2cd-40ff-861a-0777ba1f3f5d@f9941",
+        "__uuid__": "89e711ca-1ba8-423c-abfe-28235c9b3788@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]

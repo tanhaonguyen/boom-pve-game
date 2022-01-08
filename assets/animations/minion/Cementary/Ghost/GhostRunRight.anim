@@ -1,11 +1,11 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "BatLeft",
+    "_name": "GhostRunRight",
     "_objFlags": 0,
     "_native": "",
     "sample": 60,
-    "speed": 1,
+    "speed": 2,
     "wrapMode": 2,
     "enableTrsBlending": false,
     "_duration": 0.5166666666666667,
@@ -59,19 +59,19 @@
     ],
     "_values": [
       {
-        "__uuid__": "93763180-f2cd-40ff-861a-0777ba1f3f5d@f9941",
+        "__uuid__": "d54f47bd-ffad-4683-a4e1-40b60de7e6f6@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "1821cd93-de70-4b19-b57d-d351b59e78fc@f9941",
+        "__uuid__": "cb58090c-6725-4592-b8bc-1ff8c4fbc8b3@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "cba26973-e00d-4777-8348-251bf7ecab76@f9941",
+        "__uuid__": "14efdf1c-f966-4641-a576-380b06df60a2@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "93763180-f2cd-40ff-861a-0777ba1f3f5d@f9941",
+        "__uuid__": "d54f47bd-ffad-4683-a4e1-40b60de7e6f6@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]

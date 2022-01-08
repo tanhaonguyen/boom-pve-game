@@ -110,17 +110,19 @@ export class LowLevelAI extends Component {
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
 
+           
+            var number = 1;
+            var chooseNegative = Math.random()>=0.5;
+            if(chooseNegative){
+                number = -number;
+            }
+
             var choosePath = Math.random()>=0.5;
             if(choosePath){
                 if(this.randomX != 0){
                     this.randomX = -this.randomX;
                 }
                 else{
-                    var number = 1;
-                    var chooseNegative = Math.random()>=0.5;
-                    if(chooseNegative){
-                        number = -number;
-                    }
                     this.randomX = number;
                 }
                 this.randomY = 0;
@@ -130,11 +132,6 @@ export class LowLevelAI extends Component {
                     this.randomY = -this.randomY;
                 }
                 else{
-                    var number = 1;
-                    var chooseNegative = Math.random()>=0.5;
-                    if(chooseNegative){
-                        number = -number;
-                    }
                     this.randomY = number;
                 }
                 this.randomX = 0;

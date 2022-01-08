@@ -1,14 +1,14 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "BatLeft",
+    "_name": "GhostUp",
     "_objFlags": 0,
     "_native": "",
     "sample": 60,
     "speed": 1,
     "wrapMode": 2,
     "enableTrsBlending": false,
-    "_duration": 0.5166666666666667,
+    "_duration": 0.7666666666666667,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -53,25 +53,25 @@
     "__type__": "cc.ObjectCurve",
     "_times": [
       0,
-      0.16666666666666666,
-      0.3333333333333333,
-      0.5
+      0.25,
+      0.5,
+      0.75
     ],
     "_values": [
       {
-        "__uuid__": "93763180-f2cd-40ff-861a-0777ba1f3f5d@f9941",
+        "__uuid__": "73826146-1fe3-4e23-bb1a-f2e399835854@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "1821cd93-de70-4b19-b57d-d351b59e78fc@f9941",
+        "__uuid__": "3f1ec63d-6a88-4e05-92f9-20ac8745313d@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "cba26973-e00d-4777-8348-251bf7ecab76@f9941",
+        "__uuid__": "829a535e-669f-4923-813a-2046461ef7d9@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "93763180-f2cd-40ff-861a-0777ba1f3f5d@f9941",
+        "__uuid__": "829a535e-669f-4923-813a-2046461ef7d9@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]

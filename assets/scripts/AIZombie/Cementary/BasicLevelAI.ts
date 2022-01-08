@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, } from 'cc';
+import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -62,6 +62,7 @@ export class BasicLevelAI extends Component {
             if(this.timer<0){         
                 this.randomX = randomRangeInt(-1,2);
                 this.randomY = randomRangeInt(-1,2); 
+
                 this.checkEqual(this.randomX,this.randomY);
                 this.changeTime=randomRangeInt(3,5);
                 this.timer = this.changeTime;
@@ -70,7 +71,6 @@ export class BasicLevelAI extends Component {
         else{
            this.followPlayer(deltaTime);
         }
-        // console.log(this.randomX,this.randomY);
     }
 
     private changeTime: number = 3;
@@ -115,7 +115,7 @@ export class BasicLevelAI extends Component {
 
     @property({ type: Node })
     Player: Node;
-    private distanceFollow: number = 200;
+    private distanceFollow: number = 150;
     private direction: Vec3;
 
     playerOnSight(dt:number){
@@ -130,13 +130,16 @@ export class BasicLevelAI extends Component {
             if(direction.strictEquals(look)){
             this.isFollowing = true;
             this.direction = direction;
+            this.animator.setValue('isFollow', true);
             }
         }
         else{
             this.isFollowing = false;
+            this.animator.setValue('isFollow', false);
         }
         
     }
+
 
     followPlayer(deltaTime:number){
         this.speed = 100;
@@ -148,49 +151,40 @@ export class BasicLevelAI extends Component {
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
 
-            var objectSize = otherCollider.node.getComponent(UITransform).contentSize;
-            var objectPos = otherCollider.node.getPosition();
-            objectPos.x = objectPos.x + objectSize.width/2;
-            objectPos.y = objectPos.y + objectSize.height/2;
-
-            var direction = objectPos.subtract(selfCollider.node.getPosition()).normalize();
-            direction.x = Math.round(direction.x);
-            direction.y = Math.round(direction.y);
-
-            var look = new Vec2(this.animator.getValue('lookX'), this.animator.getValue('lookY'));
-
             this.isFollowing = false;
 
             var number = 1;
-
             var chooseNegative = Math.random()>=0.5;
             if(chooseNegative){
                 number = -number;
             }
 
-            if(direction.x != 0 && direction.y != 0){
-                var choosePath = Math.random()>=0.5;
-                if(choosePath){
-                    this.randomX = -look.x;
-                    this.randomY = 0;
+            var choosePath = Math.random()>=0.5;
+            if(choosePath){
+                if(this.randomX != 0){
+                    this.randomX = -this.randomX;
                 }
                 else{
-                    this.randomY = -look.y;
-                    this.randomX = 0;
+                    this.randomX = number;
                 }
-            }
-            else if(direction.x == 0){
-                this.randomX = number;
                 this.randomY = 0;
             }
-            else if(direction.y == 0){
-                this.randomY = number;
+            else{
+                if(this.randomY != 0){
+                    this.randomY = -this.randomY;
+                }
+                else{
+                    this.randomY = number;
+                }
                 this.randomX = 0;
             }
+            selfCollider.off(Contact2DType.BEGIN_CONTACT);
+        }
+    }
 
-            this.timer = this.changeTime;
-
- 
+    onEndContact(selfCollider: Collider2D, otherCollider: Collider2D) {
+        if(otherCollider.node.getComponent("PlayerController")){
+            selfCollider.on(Contact2DType.BEGIN_CONTACT,this.onBeginContact,this);
         }
     }
 }
