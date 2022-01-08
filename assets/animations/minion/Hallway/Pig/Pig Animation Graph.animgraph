@@ -1,0 +1,485 @@
+[
+  {
+    "__type__": "cc.animation.AnimationGraph",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "_layers": [
+      {
+        "__id__": 1
+      }
+    ],
+    "_variables": {
+      "lookX": {
+        "__id__": 39
+      },
+      "lookY": {
+        "__id__": 40
+      },
+      "isFollow": {
+        "__id__": 41
+      }
+    }
+  },
+  {
+    "__type__": "cc.animation.Layer",
+    "_stateMachine": {
+      "__id__": 2
+    },
+    "name": "",
+    "weight": 1,
+    "mask": null,
+    "blending": 1
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "_states": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 5
+      },
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 19
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 32
+      },
+      {
+        "__id__": 33
+      },
+      {
+        "__id__": 36
+      }
+    ],
+    "_entryState": {
+      "__id__": 3
+    },
+    "_exitState": {
+      "__id__": 4
+    },
+    "_anyState": {
+      "__id__": 5
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -211,
+      "centerY": -1
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": 169,
+      "centerY": -7
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -87,
+      "centerY": -2
+    },
+    "name": "Blend 2D",
+    "_components": [],
+    "motion": {
+      "__id__": 7
+    },
+    "speed": {
+      "__id__": 18
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2D",
+    "__editorExtras__": {
+      "centerX": 0,
+      "centerY": 0
+    },
+    "name": "Blend 2D",
+    "algorithm": 0,
+    "_items": [
+      {
+        "__id__": 8
+      },
+      {
+        "__id__": 10
+      },
+      {
+        "__id__": 12
+      },
+      {
+        "__id__": 14
+      }
+    ],
+    "paramX": {
+      "__id__": 16
+    },
+    "paramY": {
+      "__id__": 17
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 9
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": -2,
+      "centerY": -126
+    },
+    "clip": {
+      "__uuid__": "a77fa0b6-b91e-4d0d-a037-f13a3da63440",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 11
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": -1,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": -194,
+      "centerY": -20
+    },
+    "clip": {
+      "__uuid__": "e6a06206-b934-48ad-a674-6b02fde85002",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 13
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": 183,
+      "centerY": -11
+    },
+    "clip": {
+      "__uuid__": "09e173bc-c063-475b-88e7-315c0a4df0ce",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 15
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": -1
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": -4,
+      "centerY": 135
+    },
+    "clip": {
+      "__uuid__": "cbdaa516-d839-46a0-b7b6-b93e777fe713",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "lookX",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "lookY",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "",
+    "value": 1
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 42,
+      "centerY": -1
+    },
+    "name": "Blend 2D",
+    "_components": [],
+    "motion": {
+      "__id__": 20
+    },
+    "speed": {
+      "__id__": 31
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2D",
+    "__editorExtras__": {
+      "centerX": -20,
+      "centerY": 4,
+      "viewport": {
+        "scale": 1,
+        "top": 3,
+        "left": -1
+      }
+    },
+    "name": "Blend 2D",
+    "algorithm": 0,
+    "_items": [
+      {
+        "__id__": 21
+      },
+      {
+        "__id__": 23
+      },
+      {
+        "__id__": 25
+      },
+      {
+        "__id__": 27
+      }
+    ],
+    "paramX": {
+      "__id__": 29
+    },
+    "paramY": {
+      "__id__": 30
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 22
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": 172,
+      "centerY": 8
+    },
+    "clip": {
+      "__uuid__": "f5caa67b-cb65-4dd7-b91e-9f7beed7dee2",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 24
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": -1
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": -12,
+      "centerY": 134
+    },
+    "clip": {
+      "__uuid__": "7797f4a8-65e6-4f47-950d-8063de236ab6",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 26
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 1
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": -17,
+      "centerY": -131
+    },
+    "clip": {
+      "__uuid__": "01741cb1-1b10-472a-8c0f-0d0469fe3a2a",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend2DItem",
+    "motion": {
+      "__id__": 28
+    },
+    "threshold": {
+      "__type__": "cc.Vec2",
+      "x": -1,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "centerX": -213,
+      "centerY": -15
+    },
+    "clip": {
+      "__uuid__": "277ca135-bf55-46e0-94a4-a3c2a68ab69e",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "lookX",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "lookY",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "",
+    "value": 1
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 3
+    },
+    "to": {
+      "__id__": 6
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 6
+    },
+    "to": {
+      "__id__": 19
+    },
+    "conditions": [
+      {
+        "__id__": 34
+      }
+    ],
+    "duration": 0,
+    "relativeDuration": false,
+    "exitConditionEnabled": false,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 35
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "isFollow",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 19
+    },
+    "to": {
+      "__id__": 6
+    },
+    "conditions": [
+      {
+        "__id__": 37
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 1,
+    "operand": {
+      "__id__": 38
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "isFollow",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.Variable",
+    "_type": 0,
+    "_value": 0
+  },
+  {
+    "__type__": "cc.animation.Variable",
+    "_type": 0,
+    "_value": 0
+  },
+  {
+    "__type__": "cc.animation.Variable",
+    "_type": 1,
+    "_value": false
+  }
+]

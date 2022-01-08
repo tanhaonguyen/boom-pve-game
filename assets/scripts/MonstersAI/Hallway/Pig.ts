@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, } from 'cc';
+import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, CircleCollider2D, } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -14,8 +14,8 @@ const { ccclass, property } = _decorator;
  *
  */
  
-@ccclass('BasicLevelAI')
-export class BasicLevelAI extends Component {
+@ccclass('Pig')
+export class Pig extends Component {
     // [1]
     // dummy = '';
 
@@ -33,9 +33,9 @@ export class BasicLevelAI extends Component {
             this.Player = canvas.getChildByName('player');
         }
 
-        let collider = this.getComponent(Collider2D);
-        if (collider) {
-            collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
+        let boxCollider = this.getComponent(BoxCollider2D);
+        if (boxCollider) {
+            boxCollider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         }
 
         this.animator.setValue('lookX',0);
@@ -57,6 +57,8 @@ export class BasicLevelAI extends Component {
         this.playerOnSight(deltaTime);
         this.timer -= deltaTime;
         if(!this.isFollowing){
+            this.getComponent(BoxCollider2D).on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
+
             this.speed = 40;
             this.movingAround(this.randomX,this.randomY,deltaTime);
             if(this.timer<0){         
@@ -69,7 +71,8 @@ export class BasicLevelAI extends Component {
             }
         }
         else{
-           this.followPlayer(deltaTime);
+            this.getComponent(BoxCollider2D).off(Contact2DType.BEGIN_CONTACT);
+            this.followPlayer(deltaTime);
         }
     }
 
@@ -119,19 +122,27 @@ export class BasicLevelAI extends Component {
     private direction: Vec3;
 
     playerOnSight(dt:number){
-        var direction = this.Player.getPosition().subtract(this.node.position).normalize();
-        direction = new Vec3(Math.round(direction.x),Math.round(direction.y),0);
+        var inSight = Vec3.distance(this.Player.getPosition(),this.node.getPosition());
 
-        var look = new Vec3(this.animator.getValue('lookX'), this.animator.getValue('lookY'),0);
-       
-        var distance = Vec3.distance(this.Player.getPosition(),this.node.getPosition());
-
-        if(distance < this.distanceFollow){
-            if(direction.strictEquals(look)){
-            this.isFollowing = true;
+        if(inSight < this.distanceFollow){
+            var direction = this.Player.getPosition().subtract(this.node.position).normalize();
+            direction = new Vec3(Math.round(direction.x),Math.round(direction.y),0);
             this.direction = direction;
-            this.animator.setValue('isFollow', true);
+
+            if(Math.abs(direction.x) == Math.abs(direction.y)){
+                var distance = this.Player.getPosition().subtract(this.node.getPosition());
+                distance.x = Math.abs(distance.x);
+                distance.y = Math.abs(distance.y);
+                if(distance.x < distance.y){
+                    direction.y = 0;
+                }
+                else{ 
+                    direction.x = 0;
+                }     
             }
+           
+            this.isFollowing = true;
+            this.animator.setValue('isFollow', true);
         }
         else{
             this.isFollowing = false;
@@ -142,7 +153,11 @@ export class BasicLevelAI extends Component {
 
 
     followPlayer(deltaTime:number){
-        this.speed = 100;
+        this.speed = 60;
+
+        this.animator.setValue('lookX', this.direction.x);
+        this.animator.setValue('lookY', this.direction.y);
+       
         this.node.setPosition(this.node.position.x+this.speed*deltaTime*this.direction.x,this.node.position.y+this.speed*deltaTime*this.direction.y);
     }
 

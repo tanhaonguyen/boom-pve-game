@@ -14,8 +14,8 @@ const { ccclass, property } = _decorator;
  *
  */
  
-@ccclass('LowLevelAi')
-export class LowLevelAI extends Component {
+@ccclass('Bat')
+export class Bat extends Component {
     // [1]
     // dummy = '';
 
