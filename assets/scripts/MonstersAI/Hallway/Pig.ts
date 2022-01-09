@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, CircleCollider2D, } from 'cc';
+import { ColliderGroup } from '../../GlobalDefines';
 const { ccclass, property } = _decorator;
 
 /**
@@ -30,12 +31,13 @@ export class Pig extends Component {
 
         if(this.Player == null){
             var canvas = this.node.parent;
-            this.Player = canvas.getChildByName('player');
+            this.Player = canvas.getChildByName('Player');
         }
 
         let boxCollider = this.getComponent(BoxCollider2D);
         if (boxCollider) {
             boxCollider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
+            boxCollider.on(Contact2DType.POST_SOLVE, this.onPostSolve, this);
         }
 
         this.animator.setValue('lookX',0);
@@ -57,8 +59,6 @@ export class Pig extends Component {
         this.playerOnSight(deltaTime);
         this.timer -= deltaTime;
         if(!this.isFollowing){
-            this.getComponent(BoxCollider2D).on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
-
             this.speed = this.normalSpeed;
             this.movingAround(this.randomX,this.randomY,deltaTime);
             if(this.timer<0){         
@@ -68,9 +68,9 @@ export class Pig extends Component {
             }
         }
         else{
-            this.getComponent(BoxCollider2D).off(Contact2DType.BEGIN_CONTACT);
             this.followPlayer(deltaTime);
         }
+        this.selfDestroy();
     }
 
     private changeTime: number = 3;
@@ -189,14 +189,31 @@ export class Pig extends Component {
         }
     }
 
+    destroyObject: boolean = false;
+    selfDestroy(){
+        if(this.destroyObject){
+            this.node.destroy();
+            this.destroyObject = false;
+        }
+    }
+
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
-
-            this.isFollowing = false;
-
+            if(otherCollider.group == ColliderGroup.Explosion){
+                this.destroyObject = true;
+                return;
+            }
             this.randomPath();
         }
     }
+
+    onPostSolve(selfCollider: Collider2D, otherCollider: Collider2D) {
+        if(!otherCollider.node.getComponent("PlayerController")){
+            if(this.isFollowing){
+                this.isFollowing = false;
+            }
+        }
+    } 
 }
 
 /**

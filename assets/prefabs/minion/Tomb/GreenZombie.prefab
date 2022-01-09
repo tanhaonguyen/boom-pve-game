@@ -46,8 +46,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -272.627,
-      "y": 381.811,
+      "x": -294.2,
+      "y": -310.33,
       "z": 0
     },
     "_lrot": {
@@ -265,7 +265,7 @@
     "enabledContactListener": true,
     "bullet": false,
     "awakeOnLoad": true,
-    "_group": 1,
+    "_group": 64,
     "_type": 2,
     "_allowSleep": false,
     "_gravityScale": 0,

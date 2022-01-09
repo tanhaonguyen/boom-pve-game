@@ -25,7 +25,11 @@ export class CameraFollow extends Component {
 
     start() {
         // [3]
-        // this.setPlayerPositionAtStart();
+        if(this.Player == null){
+            var canvas = this.node.parent;
+            this.Player = canvas.getChildByName('Player');
+        }
+        this.setPlayerPositionAtStart();
     }
 
     update() {
@@ -37,6 +41,7 @@ export class CameraFollow extends Component {
     Player: Node;
 
     CameraFollowObject() {
+        
 
         let playerPosition = this.Player.getPosition();
         let currentPosition = this.node.getPosition();
@@ -49,13 +54,13 @@ export class CameraFollow extends Component {
         var canvasSize = canvas.getComponent(UITransform).contentSize;
         var tiledmapSize = tiledmap.getComponent(UITransform).contentSize;
 
-        var boundaryY = Math.abs(tiledmapSize.height - canvasSize.height)/2 + 40;
+        var boundaryY = Math.abs(tiledmapSize.height - canvasSize.height)/2 + 40 + tiledmap.position.y;
         currentPosition.y = misc.clampf(playerPosition.y, -boundaryY, boundaryY);
         currentPosition.z = 1000;
-        currentPosition.x = 0;
+        currentPosition.x = tiledmap.position.x;
 
         if(tiledmapSize.width>canvasSize.width){
-            var boundaryX = (tiledmapSize.width - canvasSize.width)/2;
+            var boundaryX = (tiledmapSize.width - canvasSize.width)/2 + 40;
             currentPosition.x = misc.clampf(playerPosition.x, -boundaryX, boundaryX);
         }
 
@@ -67,7 +72,7 @@ export class CameraFollow extends Component {
         var tiledmap = canvas.getChildByName("TiledMap");
 
         var tiledmapSize = tiledmap.getComponent(UITransform).contentSize;
-        this.Player.setPosition(0, -tiledmapSize.height/2 + 5);
+        this.Player.setPosition(0 + tiledmap.position.x, -tiledmapSize.height/2 + 5 + tiledmap.position.y);
     }
 }
 

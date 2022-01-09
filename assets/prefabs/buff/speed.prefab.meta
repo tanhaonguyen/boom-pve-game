@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "db6d7651-ff2f-4353-ab1d-129f95b52488",
+  "uuid": "97cde97d-0940-4a72-8fe2-0723387fe34b",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Speed"
+    "syncNodeName": "speed"
   }
 }

@@ -1,3 +1,5 @@
+import { ExplosionController } from "./node-controllers/ExplosionController";
+
 export enum Buff {
     LengthPotion,
     MaxLengthBuff,
@@ -10,7 +12,7 @@ export enum ColliderGroup {
     Player = 2,
     Buff = 4,
     Bomb = 8,
-    Explosion = 16,
+    Explosion  = 16,
     DestroyableNode = 32
 }
 

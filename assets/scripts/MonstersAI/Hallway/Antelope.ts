@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, } from 'cc';
+import { ColliderGroup } from '../../GlobalDefines';
 const { ccclass, property } = _decorator;
 
 /**
@@ -30,7 +31,7 @@ export class Antelope extends Component {
 
         if(this.Player == null){
             var canvas = this.node.parent;
-            this.Player = canvas.getChildByName('player');
+            this.Player = canvas.getChildByName('Player');
         }
 
         let collider = this.getComponent(Collider2D);
@@ -77,6 +78,7 @@ export class Antelope extends Component {
                 this.followPlayer(deltaTime);
             }     
         }
+        this.selfDestroy();
     }
 
     private changeTime: number = 3;
@@ -210,9 +212,21 @@ export class Antelope extends Component {
         return (nodeParent == wall || nodeParent == largeObject || object == bottomCollider);
     }
 
+    destroyObject: boolean = false;
+    selfDestroy(){
+        if(this.destroyObject){
+            this.node.destroy();
+            this.destroyObject = false;
+        }
+    }
+
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
 
         if(!otherCollider.node.getComponent("PlayerController")){
+            if(otherCollider.group == ColliderGroup.Explosion){
+                this.destroyObject = true;
+                return;
+            }
             this.randomPath();
         }
     }

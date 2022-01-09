@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, } from 'cc';
+import { ColliderGroup } from '../../GlobalDefines';
 const { ccclass, property } = _decorator;
 
 /**
@@ -70,6 +71,7 @@ export class Ghost extends Component {
         else{
            this.followPlayer(deltaTime);
         }
+        this.selfDestroy();
     }
 
     private changeTime: number = 3;
@@ -137,7 +139,6 @@ export class Ghost extends Component {
             this.isFollowing = false;
             this.animator.setValue('isFollow', false);
         }
-        
     }
 
 
@@ -176,8 +177,20 @@ export class Ghost extends Component {
         }
     }
 
+    destroyObject: boolean = false;
+    selfDestroy(){
+        if(this.destroyObject){
+            this.node.destroy();
+            this.destroyObject = false;
+        }
+    }
+
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
+            if(otherCollider.group == ColliderGroup.Explosion){
+                this.destroyObject = true;
+                return;
+            }
             this.randomPath();
         }
     }

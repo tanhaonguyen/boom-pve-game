@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, } from 'cc';
+import { ColliderGroup } from '../../GlobalDefines';
 const { ccclass, property } = _decorator;
 
 /**
@@ -30,7 +31,7 @@ export class Zombie extends Component {
 
         if(this.Player == null){
             var canvas = this.node.parent;
-            this.Player = canvas.getChildByName('player');
+            this.Player = canvas.getChildByName('Player');
         }
 
         let collider = this.getComponent(Collider2D);
@@ -71,6 +72,11 @@ export class Zombie extends Component {
         else{
             this.followPlayer(deltaTime);
         }
+        this.destroyThing();
+        this.selfDestroy();
+    }
+
+    destroyThing(){
         if(this.destroyObject != null){
             var canvas = this.node.getParent();
             var tiledMap = canvas.getChildByName("TiledMap");
@@ -146,7 +152,7 @@ export class Zombie extends Component {
 
 
     followPlayer(deltaTime:number){
-        this.speed = this.normalSpeed*3;
+        this.speed = this.normalSpeed*2;
         this.node.setPosition(this.node.position.x+this.speed*deltaTime*this.direction.x,this.node.position.y+this.speed*deltaTime*this.direction.y);
     }
 
@@ -216,9 +222,25 @@ export class Zombie extends Component {
         return (nodeParent == wall || nodeParent == largeObject || object == bottomCollider);
     }
 
+    destroyNode: boolean = false;
+    selfDestroy(){
+        if(this.destroyNode){
+            this.bombCount = this.bombCount + 1;
+            if(this.bombCount > 1){
+                this.node.destroy();
+            }
+            this.destroyNode = false;
+        }
+    }
+
+    bombCount: number = 0;
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
 
         if(!otherCollider.node.getComponent("PlayerController")){
+            if(otherCollider.group == ColliderGroup.Explosion){
+                this.destroyNode = true;
+                return;
+            }
             if(!this.checkWall(otherCollider.node)){
                 return;
             }
