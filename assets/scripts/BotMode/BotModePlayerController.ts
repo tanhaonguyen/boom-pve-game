@@ -2,6 +2,7 @@
 import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, director, sys, Label, find } from 'cc';
 import { BotModeBombController } from './BotModeBombController';
 import { BotModeBotController } from './BotModeBotController';
+import { BotModeSceneController } from './BotModeSceneController';
 const { ccclass, property } = _decorator;
 
 enum Buff {
@@ -47,7 +48,10 @@ export class BotModePlayerController extends Component {
     private arrowLeftDown: boolean = false;
     private arrowRightDown: boolean = false;
     private arrowUpDown: boolean = false;
-    private arrowDownDown: boolean = false;W
+    private arrowDownDown: boolean = false;
+
+    private coinCollectedPerRound: number = 0;
+    private coinToCollectPerRound: number = 0;
 
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
@@ -248,12 +252,22 @@ export class BotModePlayerController extends Component {
     public onKilled() {
         this.getComponent(Animation).play("player-dead");
         this.onDestroy();
-        setTimeout(() => director.pause(), 5000);
+        setTimeout(() => BotModeSceneController.instance.onLose(), 500);
     }
 
     public onCoinCollected() {
         ++this.coinCount;
+        ++this.coinCollectedPerRound;
         find('Canvas/CoinCount/CoinCountLabel').getComponent(Label).string = this.coinCount.toString();
         sys.localStorage.setItem("coinCount", this.coinCount.toString());
+
+        if (this.coinCollectedPerRound === this.coinToCollectPerRound) {
+            setTimeout(() => BotModeSceneController.instance.onClear(), 500);
+        }
+    }
+
+    public updateCoinCollectedPerRound(numCoin: number) {
+        this.coinCollectedPerRound = 0;
+        this.coinToCollectPerRound = numCoin;
     }
 }

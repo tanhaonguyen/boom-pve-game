@@ -353,8 +353,6 @@ export class BotModeBotController extends Component {
         if (route.length === 0)
             return AIAction.None;
 
-        console.log(route);
-
         let squareToGo = route[0];
         if (aiSquareIdx.x === squareToGo.x && aiSquareIdx.y === squareToGo.y) {
             route.shift();
@@ -396,6 +394,8 @@ export class BotModeBotController extends Component {
         let firstX = -460;
         let firstY = 300;
 
+        let numCoin = 0;
+
         // Iterate over scene matrix
         for (let i = 0; i < this.sceneMatrix.length; ++i) {
             for (let j = 0; j < this.sceneMatrix[0].length; ++j) {
@@ -403,9 +403,12 @@ export class BotModeBotController extends Component {
                     let coin = instantiate(this.coinPrefab);
                     coin.setParent(this.node.getParent().getChildByName('Coin'));
                     coin.setPosition(new Vec3(firstX + j * 40, firstY - i * 40, 0));
+                    ++numCoin;
                 }
             }
         }
+
+        BotModePlayerController.instance.updateCoinCollectedPerRound(numCoin);
     }
 
     private __updateBotStats(buffTag: number, pos: Vec3): void {
