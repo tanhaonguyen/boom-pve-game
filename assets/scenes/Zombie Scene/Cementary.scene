@@ -352,7 +352,7 @@
     "propertyPath": [
       "_name"
     ],
-    "value": "player"
+    "value": "Player"
   },
   {
     "__type__": "cc.TargetInfo",

@@ -117,6 +117,7 @@ export class Bat extends Component {
             }
 
             var choosePath = Math.random()>=0.5;
+            this.node.setPosition(this.node.position.x -5, this.node.position.y - 5)
             if(choosePath){
                 if(this.randomX != 0){
                     this.randomX = -this.randomX;
@@ -124,7 +125,7 @@ export class Bat extends Component {
                 else{
                     this.randomX = number;
                 }
-                selfCollider.node.setPosition(selfCollider.node.position.x -10, selfCollider.node.position.y);
+                
                 this.randomY = 0;
             }
             else{
@@ -134,7 +135,6 @@ export class Bat extends Component {
                 else{
                     this.randomY = number;
                 }
-                selfCollider.node.setPosition(selfCollider.node.position.x, selfCollider.node.position.y-10);
                 this.randomX = 0;
             }
             selfCollider.off(Contact2DType.BEGIN_CONTACT);
