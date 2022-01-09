@@ -175,28 +175,6 @@
 3,4,3,3,3,3,3,4,3,4,4,3,3,3,4,3,4,4,4,4,3,4,4,3,3
 </data>
  </layer>
- <objectgroup id="14" name="StaticObject">
-  <object id="586" gid="68" x="400" y="720" width="40" height="120"/>
-  <object id="587" gid="68" x="560" y="720" width="40" height="120"/>
-  <object id="484" gid="68" x="400" y="160" width="40" height="120"/>
-  <object id="485" gid="68" x="560" y="160" width="40" height="120"/>
-  <object id="486" gid="62" x="320" y="160" width="40" height="80"/>
-  <object id="487" gid="62" x="240" y="160" width="40" height="80"/>
-  <object id="488" gid="62" x="160" y="160" width="40" height="80"/>
-  <object id="489" gid="62" x="640" y="160" width="40" height="80"/>
-  <object id="490" gid="62" x="720" y="160" width="40" height="80"/>
-  <object id="491" gid="62" x="800" y="160" width="40" height="80"/>
-  <object id="492" gid="62" x="160" y="720" width="40" height="80"/>
-  <object id="493" gid="62" x="240" y="720" width="40" height="80"/>
-  <object id="494" gid="62" x="320" y="720" width="40" height="80"/>
-  <object id="495" gid="62" x="640" y="720" width="40" height="80"/>
-  <object id="496" gid="62" x="720" y="720" width="40" height="80"/>
-  <object id="497" gid="62" x="800" y="720" width="40" height="80"/>
-  <object id="574" gid="62" x="880" y="160" width="40" height="80"/>
-  <object id="575" gid="62" x="80" y="160" width="40" height="80"/>
-  <object id="576" gid="62" x="80" y="720" width="40" height="80"/>
-  <object id="577" gid="62" x="880" y="720" width="40" height="80"/>
- </objectgroup>
  <objectgroup id="15" name="LargeObject">
   <object id="394" gid="75" x="440" y="120" width="120" height="120"/>
   <object id="523" gid="67" x="280" y="480" width="80" height="120"/>
@@ -455,5 +433,27 @@
   <object id="751" gid="66" x="560" y="240" width="40" height="120"/>
   <object id="752" gid="66" x="480" y="360" width="40" height="120"/>
   <object id="753" gid="66" x="480" y="520" width="40" height="120"/>
+ </objectgroup>
+ <objectgroup id="14" name="StaticObject">
+  <object id="586" gid="68" x="400" y="720" width="40" height="120"/>
+  <object id="587" gid="68" x="560" y="720" width="40" height="120"/>
+  <object id="484" gid="68" x="400" y="160" width="40" height="120"/>
+  <object id="485" gid="68" x="560" y="160" width="40" height="120"/>
+  <object id="486" gid="62" x="320" y="160" width="40" height="80"/>
+  <object id="487" gid="62" x="240" y="160" width="40" height="80"/>
+  <object id="488" gid="62" x="160" y="160" width="40" height="80"/>
+  <object id="489" gid="62" x="640" y="160" width="40" height="80"/>
+  <object id="490" gid="62" x="720" y="160" width="40" height="80"/>
+  <object id="491" gid="62" x="800" y="160" width="40" height="80"/>
+  <object id="492" gid="62" x="160" y="720" width="40" height="80"/>
+  <object id="493" gid="62" x="240" y="720" width="40" height="80"/>
+  <object id="494" gid="62" x="320" y="720" width="40" height="80"/>
+  <object id="495" gid="62" x="640" y="720" width="40" height="80"/>
+  <object id="496" gid="62" x="720" y="720" width="40" height="80"/>
+  <object id="497" gid="62" x="800" y="720" width="40" height="80"/>
+  <object id="574" gid="62" x="880" y="160" width="40" height="80"/>
+  <object id="575" gid="62" x="80" y="160" width="40" height="80"/>
+  <object id="576" gid="62" x="80" y="720" width="40" height="80"/>
+  <object id="577" gid="62" x="880" y="720" width="40" height="80"/>
  </objectgroup>
 </map>

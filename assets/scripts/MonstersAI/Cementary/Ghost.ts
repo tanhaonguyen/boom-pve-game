@@ -36,6 +36,7 @@ export class Ghost extends Component {
         let collider = this.getComponent(Collider2D);
         if (collider) {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
+            collider.on(Contact2DType.POST_SOLVE, this.onPostSolve, this);
         }
 
         this.animator.setValue('lookX',0);
@@ -177,14 +178,17 @@ export class Ghost extends Component {
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
-
-            this.isFollowing = false;
-
             this.randomPath();
-
-            this.timer = this.changeTime;
         }
     }
+    
+    onPostSolve(selfCollider: Collider2D, otherCollider: Collider2D) {
+        if(!otherCollider.node.getComponent("PlayerController")){
+            if(this.isFollowing){
+                this.isFollowing = false;
+            }
+        }
+    } 
 
 }
 

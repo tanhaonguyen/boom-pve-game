@@ -130,10 +130,7 @@ export class Bat extends Component {
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
-
            this.randomPath();
-
-           this.timer = this.changeTime;
         }
     }
 }
