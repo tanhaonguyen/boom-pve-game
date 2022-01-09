@@ -1,5 +1,5 @@
 
-import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, director, sys, Label, find } from 'cc';
+import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, sys, Label, find } from 'cc';
 import { BotModeBombController } from './BotModeBombController';
 import { BotModeBotController } from './BotModeBotController';
 import { BotModeSceneController } from './BotModeSceneController';
@@ -256,6 +256,5 @@ export class BotModePlayerController extends Component {
         ++this.coinCount;
         find('Canvas/CoinCount/CoinCountLabel').getComponent(Label).string = this.coinCount.toString();
         sys.localStorage.setItem("coinCount", this.coinCount.toString());
-        this.scheduleOnce(() => BotModeSceneController.instance.onClear(), 5);
     }
 }

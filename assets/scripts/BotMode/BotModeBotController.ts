@@ -2,6 +2,7 @@
 import { _decorator, Component, resources, JsonAsset, find, Node, instantiate, Vec3, Vec2, Prefab, Animation, Collider2D, Contact2DType, IPhysics2DContact } from 'cc';
 import { BotModeBombController } from './BotModeBombController';
 import { BotModePlayerController } from './BotModePlayerController';
+import { BotModeSceneController } from './BotModeSceneController';
 const { ccclass, property } = _decorator;
  
 enum AIAction {
@@ -387,6 +388,8 @@ export class BotModeBotController extends Component {
             this.action = AIAction.Dead;
             this.__spawnCoin();
             this.scheduleOnce(() => this.node.destroy(), 1);
+            
+            setTimeout(() => BotModeSceneController.instance.onClear(), 5000);
         }
     }
 
