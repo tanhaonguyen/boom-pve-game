@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, } from 'cc';
+import { _decorator, Component, Node, animation,Animation, math, macro, Vec3, random, randomRange, Vec2, randomRangeInt, TERRAIN_MAX_BLEND_LAYERS, director, Collider2D, Contact2DType, PhysicsSystem2D, equals, RigidBody2D, UITransform, BoxCollider2D, AnimationClip, } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -14,8 +14,8 @@ const { ccclass, property } = _decorator;
  *
  */
  
-@ccclass('Bat')
-export class Bat extends Component {
+@ccclass('Antelope')
+export class Antelope extends Component {
     // [1]
     // dummy = '';
 
@@ -28,10 +28,15 @@ export class Bat extends Component {
         this.animator = this.node.getComponent(animation.AnimationController);
         this.timer = this.changeTime;
 
+        if(this.Player == null){
+            var canvas = this.node.parent;
+            this.Player = canvas.getChildByName('player');
+        }
+
         let collider = this.getComponent(Collider2D);
         if (collider) {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
-            collider.on(Contact2DType.END_CONTACT, this.onEndContact, this);
+            collider.on(Contact2DType.PRE_SOLVE, this.onPreSolve, this);
         }
 
         this.animator.setValue('lookX',0);
@@ -42,6 +47,7 @@ export class Bat extends Component {
         this.checkEqual(this.randomX,this.randomY);
     }
     
+    private isFollowing: boolean = false;
 
     randomX: number;
     randomY: number;
@@ -49,15 +55,26 @@ export class Bat extends Component {
         // [4]
 
         this.deltaTime = deltaTime;
+        this.playerOnSight(deltaTime);
         this.timer -= deltaTime;
-        this.speed = 40;
-        this.movingAround(this.randomX,this.randomY,deltaTime);
-        if(this.timer<0){         
-            this.randomX = randomRangeInt(-1,2);
-            this.randomY = randomRangeInt(-1,2); 
-            this.checkEqual(this.randomX,this.randomY);
-            this.changeTime=randomRangeInt(3,5);
-            this.timer = this.changeTime;
+        if(!this.isFollowing){
+            this.speed = 40;
+            this.movingAround(this.randomX,this.randomY,deltaTime);
+            if(this.timer<0){         
+                this.randomX = randomRangeInt(-1,2);
+                this.randomY = randomRangeInt(-1,2); 
+
+                this.checkEqual(this.randomX,this.randomY);
+                this.changeTime=randomRangeInt(3,5);
+                this.timer = this.changeTime;
+            }
+            this.holdTime = 1;
+            this.animator.setValue('isFollow', false);
+        }
+        else{
+            this.holdTime -= deltaTime;
+            if(this.holdTime < 0)
+                this.followPlayer(deltaTime);
         }
     }
 
@@ -101,15 +118,47 @@ export class Bat extends Component {
         this.node.setPosition(this.node.position.x + x*this.speed*dt, this.node.position.y + y*this.speed*dt);
     }
 
-    private distanceFollow: number = 200;
+    @property({ type: Node })
+    Player: Node;
+    private distanceFollow: number = 300;
     private direction: Vec3;
 
+    private holdTime: number;
+    playerOnSight(dt:number){
+        var direction = this.Player.getPosition().subtract(this.node.position).normalize();
+        direction = new Vec3(Math.round(direction.x),Math.round(direction.y),0);
+
+        var look = new Vec3(this.animator.getValue('lookX'), this.animator.getValue('lookY'),0);
+       
+        var distance = Vec3.distance(this.Player.getPosition(),this.node.getPosition());
+
+        if(distance < this.distanceFollow){
+            if(direction.equals(look)){
+                this.isFollowing = true;
+                this.direction = direction;
+                this.animator.setValue('isFollow', true);
+            }
+        }    
+    }
+
+
+    followPlayer(deltaTime:number){
+        this.speed = 200;
+        this.node.setPosition(this.node.position.x+this.speed*deltaTime*this.direction.x,this.node.position.y+this.speed*deltaTime*this.direction.y);
+    }
 
     deltaTime: number;
+    onPreSolve(selfCollider: Collider2D, otherCollider: Collider2D) {
+        if(!otherCollider.node.getComponent("PlayerController")){
+            if(this.isFollowing){
+                this.isFollowing = false;
+            }
+        }
+    } 
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
-        if(!otherCollider.node.getComponent("PlayerController")){
 
+        if(!otherCollider.node.getComponent("PlayerController")){
             var number = 1;
             var chooseNegative = Math.random()>=0.5;
             if(chooseNegative){
@@ -124,7 +173,7 @@ export class Bat extends Component {
                 else{
                     this.randomX = number;
                 }
-                selfCollider.node.setPosition(selfCollider.node.position.x -10, selfCollider.node.position.y);
+                selfCollider.node.setPosition(selfCollider.node.position.x -5, selfCollider.node.position.y);
                 this.randomY = 0;
             }
             else{
@@ -134,7 +183,7 @@ export class Bat extends Component {
                 else{
                     this.randomY = number;
                 }
-                selfCollider.node.setPosition(selfCollider.node.position.x, selfCollider.node.position.y-10);
+                selfCollider.node.setPosition(selfCollider.node.position.x, selfCollider.node.position.y-5);
                 this.randomX = 0;
             }
             selfCollider.off(Contact2DType.BEGIN_CONTACT);

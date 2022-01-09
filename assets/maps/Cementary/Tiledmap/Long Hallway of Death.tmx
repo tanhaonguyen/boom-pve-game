@@ -200,21 +200,9 @@
   <object id="928" gid="91" x="280" y="160" width="40" height="51"/>
   <object id="929" gid="91" x="320" y="160" width="40" height="51"/>
   <object id="930" gid="91" x="360" y="160" width="40" height="51"/>
-  <object id="1030" gid="90" x="320" y="440" width="40" height="51"/>
-  <object id="1031" gid="90" x="320" y="360" width="40" height="51"/>
-  <object id="1032" gid="90" x="320" y="680" width="40" height="51"/>
-  <object id="1033" gid="90" x="320" y="760" width="40" height="51"/>
-  <object id="1034" gid="90" x="240" y="640" width="40" height="51"/>
   <object id="1035" gid="90" x="160" y="720" width="40" height="51"/>
-  <object id="1036" gid="90" x="120" y="560" width="40" height="51"/>
-  <object id="1037" gid="90" x="200" y="560" width="40" height="51"/>
-  <object id="1038" gid="90" x="240" y="480" width="40" height="51"/>
   <object id="1040" gid="90" x="160" y="400" width="40" height="51"/>
-  <object id="1041" gid="90" x="400" y="480" width="40" height="51"/>
   <object id="1042" gid="90" x="480" y="400" width="40" height="51"/>
-  <object id="1043" gid="90" x="440" y="560" width="40" height="51"/>
-  <object id="1044" gid="90" x="520" y="560" width="40" height="51"/>
-  <object id="1045" gid="90" x="400" y="640" width="40" height="51"/>
   <object id="1046" gid="90" x="480" y="720" width="40" height="51"/>
   <object id="1052" gid="90" x="200" y="400" width="40" height="51"/>
   <object id="1053" gid="90" x="240" y="400" width="40" height="51"/>
@@ -340,14 +328,6 @@
   <object id="1175" gid="89" x="480" y="1000" width="40" height="51"/>
   <object id="1176" gid="89" x="520" y="1000" width="40" height="51"/>
   <object id="1177" gid="89" x="560" y="1000" width="40" height="51"/>
-  <object id="1178" gid="89" x="240" y="1040" width="40" height="51"/>
-  <object id="1179" gid="89" x="280" y="1040" width="40" height="51"/>
-  <object id="1180" gid="89" x="360" y="1280" width="40" height="51"/>
-  <object id="1181" gid="89" x="400" y="1280" width="40" height="51"/>
-  <object id="1182" gid="89" x="440" y="1080" width="40" height="51"/>
-  <object id="1183" gid="89" x="440" y="1120" width="40" height="51"/>
-  <object id="1184" gid="89" x="200" y="1200" width="40" height="51"/>
-  <object id="1185" gid="89" x="200" y="1240" width="40" height="51"/>
   <object id="1186" gid="89" x="120" y="1160" width="40" height="51"/>
   <object id="1187" gid="89" x="520" y="1160" width="40" height="51"/>
   <object id="1188" gid="89" x="320" y="960" width="40" height="51"/>
