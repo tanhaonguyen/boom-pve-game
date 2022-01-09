@@ -79741,6 +79741,7 @@
     "startTxtNodePath": "Canvas/StartText",
     "clearTxtNodePath": "Canvas/ClearText",
     "loseTxtNodePath": "Canvas/LoseText",
+    "nextSceneName": "Town",
     "_id": "bc45PHBuJIjLswf/748vjY"
   },
   {

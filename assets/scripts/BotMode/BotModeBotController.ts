@@ -76,6 +76,9 @@ export class BotModeBotController extends Component {
         BotModeBotController._instance = this;
 
         resources.load(this.sceneName + '/matrix', JsonAsset, (err, res) => {
+            console.log('Res', res);
+            console.log('Err', err);
+            
             let data = res.json;
             this.sceneMatrix = data['matrix'];
 

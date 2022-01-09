@@ -16,6 +16,9 @@ export class BotModeSceneController extends Component {
     @property
     loseTxtNodePath: string = "";
 
+    @property
+    nextSceneName: string = "";
+
     private fogSprite: Sprite = null;
     private startTxtNode: Node = null;
     private clearTxtNode: Node = null;
@@ -127,7 +130,11 @@ export class BotModeSceneController extends Component {
 
             if (this.elapsedTime > 3) {
                 this.clearing = false;
-                director.pause();
+                
+                if (this.nextSceneName !== "")
+                    director.loadScene(this.nextSceneName);
+                else 
+                    director.pause();
             }
         }
     }
