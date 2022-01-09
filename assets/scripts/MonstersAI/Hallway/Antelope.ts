@@ -36,6 +36,7 @@ export class Antelope extends Component {
         let collider = this.getComponent(Collider2D);
         if (collider) {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
+            collider.on(Contact2DType.POST_SOLVE, this.onPostSolve, this);
             collider.on(Contact2DType.PRE_SOLVE, this.onPreSolve, this);
         }
 
@@ -51,6 +52,7 @@ export class Antelope extends Component {
 
     randomX: number;
     randomY: number;
+
     update (deltaTime: number) {
         // [4]
 
@@ -58,13 +60,10 @@ export class Antelope extends Component {
         this.playerOnSight(deltaTime);
         this.timer -= deltaTime;
         if(!this.isFollowing){
-            this.speed = 40;
+            this.speed = this.normalSpeed;
             this.movingAround(this.randomX,this.randomY,deltaTime);
             if(this.timer<0){         
-                this.randomX = randomRangeInt(-1,2);
-                this.randomY = randomRangeInt(-1,2); 
-
-                this.checkEqual(this.randomX,this.randomY);
+                this.randomPath();
                 this.changeTime=randomRangeInt(3,5);
                 this.timer = this.changeTime;
             }
@@ -73,14 +72,17 @@ export class Antelope extends Component {
         }
         else{
             this.holdTime -= deltaTime;
-            if(this.holdTime < 0)
+            if(this.holdTime < 0){
+                new Vec3(this.node.getPosition())
                 this.followPlayer(deltaTime);
+            }     
         }
     }
 
     private changeTime: number = 3;
     private timer: number;
-    private speed: number = 40;
+    private speed: number;
+    private normalSpeed: number = 60;
 
     checkEqual(x,y){
         //Neu hai so bang nhau
@@ -133,7 +135,7 @@ export class Antelope extends Component {
         var distance = Vec3.distance(this.Player.getPosition(),this.node.getPosition());
 
         if(distance < this.distanceFollow){
-            if(direction.equals(look)){
+            if(direction.strictEquals(look)){
                 this.isFollowing = true;
                 this.direction = direction;
                 this.animator.setValue('isFollow', true);
@@ -143,12 +145,54 @@ export class Antelope extends Component {
 
 
     followPlayer(deltaTime:number){
-        this.speed = 200;
+        this.speed = this.normalSpeed*4;
         this.node.setPosition(this.node.position.x+this.speed*deltaTime*this.direction.x,this.node.position.y+this.speed*deltaTime*this.direction.y);
     }
 
     deltaTime: number;
+   
+    randomPath(){
+        var number = 1;
+        var chooseNegative = Math.random()>=0.5;
+        if(chooseNegative){
+            number = -number;
+        }
+
+        var choosePath = Math.random()>=0.5;
+        if(choosePath){
+            if(this.randomX != 0){
+                this.randomX = -this.randomX;
+            }
+            else{
+                this.randomX = number;
+            }
+            this.randomY = 0;
+        }
+        else{
+            if(this.randomY != 0){
+                this.randomY = -this.randomY;
+            }
+            else{
+                this.randomY = number;
+            }
+            this.randomX = 0;
+        }
+    }
+
     onPreSolve(selfCollider: Collider2D, otherCollider: Collider2D) {
+        if(!otherCollider.node.getComponent("PlayerController")){
+            if(this.isFollowing){
+                this.randomX = this.direction.x;
+                this.randomY = this.direction.y; 
+
+                this.animator.setValue('lookX', this.randomX);
+                this.animator.setValue('lookY', this.randomY);
+                this.isFollowing = false;
+            }   
+        }
+    } 
+
+    onPostSolve(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
             if(this.isFollowing){
                 this.isFollowing = false;
@@ -156,43 +200,21 @@ export class Antelope extends Component {
         }
     } 
 
+    checkWall(object: Node){
+        var canvas = this.node.getParent();
+        var tiledMap = canvas.getChildByName("TiledMap");
+        var wall = tiledMap.getChildByName("Wall");
+        var largeObject = tiledMap.getChildByName("Large Object");
+        var bottomCollider = canvas.getChildByName("BottomCollider");
+
+        var nodeParent = object.getParent();
+        return (nodeParent == wall || nodeParent == largeObject || object == bottomCollider);
+    }
+
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
 
         if(!otherCollider.node.getComponent("PlayerController")){
-            var number = 1;
-            var chooseNegative = Math.random()>=0.5;
-            if(chooseNegative){
-                number = -number;
-            }
-
-            var choosePath = Math.random()>=0.5;
-            if(choosePath){
-                if(this.randomX != 0){
-                    this.randomX = -this.randomX;
-                }
-                else{
-                    this.randomX = number;
-                }
-                selfCollider.node.setPosition(selfCollider.node.position.x -5, selfCollider.node.position.y);
-                this.randomY = 0;
-            }
-            else{
-                if(this.randomY != 0){
-                    this.randomY = -this.randomY;
-                }
-                else{
-                    this.randomY = number;
-                }
-                selfCollider.node.setPosition(selfCollider.node.position.x, selfCollider.node.position.y-5);
-                this.randomX = 0;
-            }
-            selfCollider.off(Contact2DType.BEGIN_CONTACT);
-        }
-    }
-
-    onEndContact(selfCollider: Collider2D, otherCollider: Collider2D) {
-        if(otherCollider.node.getComponent("PlayerController")){
-            selfCollider.on(Contact2DType.BEGIN_CONTACT,this.onBeginContact,this);
+            this.randomPath();
         }
     }
 }

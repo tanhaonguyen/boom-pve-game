@@ -30,7 +30,7 @@ export class Ghost extends Component {
 
         if(this.Player == null){
             var canvas = this.node.parent;
-            this.Player = canvas.getChildByName('player');
+            this.Player = canvas.getChildByName('Player');
         }
 
         let collider = this.getComponent(Collider2D);
@@ -57,13 +57,11 @@ export class Ghost extends Component {
         this.playerOnSight(deltaTime);
         this.timer -= deltaTime;
         if(!this.isFollowing){
-            this.speed = 40;
+            this.speed = this.normalSpeed;
             this.movingAround(this.randomX,this.randomY,deltaTime);
-            if(this.timer<0){         
-                this.randomX = randomRangeInt(-1,2);
-                this.randomY = randomRangeInt(-1,2); 
-
-                this.checkEqual(this.randomX,this.randomY);
+            if(this.timer<0){   
+                
+                this.randomPath();
                 this.changeTime=randomRangeInt(3,5);
                 this.timer = this.changeTime;
             }
@@ -75,7 +73,8 @@ export class Ghost extends Component {
 
     private changeTime: number = 3;
     private timer: number;
-    private speed: number = 40;
+    private normalSpeed: number = 50;
+    private speed: number;
 
     checkEqual(x,y){
         //Neu hai so bang nhau
@@ -142,51 +141,51 @@ export class Ghost extends Component {
 
 
     followPlayer(deltaTime:number){
-        this.speed = 100;
+        this.speed = this.normalSpeed*2;
         this.node.setPosition(this.node.position.x+this.speed*deltaTime*this.direction.x,this.node.position.y+this.speed*deltaTime*this.direction.y);
     }
 
     deltaTime: number;
+
+    randomPath(){
+        var number = 1;
+        var chooseNegative = Math.random()>=0.5;
+        if(chooseNegative){
+            number = -number;
+        }
+
+        var choosePath = Math.random()>=0.5;
+        if(choosePath){
+            if(this.randomX != 0){
+                this.randomX = -this.randomX;
+            }
+            else{
+                this.randomX = number;
+            }
+            this.randomY = 0;
+        }
+        else{
+            if(this.randomY != 0){
+                this.randomY = -this.randomY;
+            }
+            else{
+                this.randomY = number;
+            }
+            this.randomX = 0;
+        }
+    }
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
 
             this.isFollowing = false;
 
-            var number = 1;
-            var chooseNegative = Math.random()>=0.5;
-            if(chooseNegative){
-                number = -number;
-            }
+            this.randomPath();
 
-            var choosePath = Math.random()>=0.5;
-            if(choosePath){
-                if(this.randomX != 0){
-                    this.randomX = -this.randomX;
-                }
-                else{
-                    this.randomX = number;
-                }
-                this.randomY = 0;
-            }
-            else{
-                if(this.randomY != 0){
-                    this.randomY = -this.randomY;
-                }
-                else{
-                    this.randomY = number;
-                }
-                this.randomX = 0;
-            }
-            selfCollider.off(Contact2DType.BEGIN_CONTACT);
+            this.timer = this.changeTime;
         }
     }
 
-    onEndContact(selfCollider: Collider2D, otherCollider: Collider2D) {
-        if(otherCollider.node.getComponent("PlayerController")){
-            selfCollider.on(Contact2DType.BEGIN_CONTACT,this.onBeginContact,this);
-        }
-    }
 }
 
 /**

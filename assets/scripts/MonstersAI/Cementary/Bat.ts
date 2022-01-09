@@ -31,7 +31,6 @@ export class Bat extends Component {
         let collider = this.getComponent(Collider2D);
         if (collider) {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
-            collider.on(Contact2DType.END_CONTACT, this.onEndContact, this);
         }
 
         this.animator.setValue('lookX',0);
@@ -50,12 +49,9 @@ export class Bat extends Component {
 
         this.deltaTime = deltaTime;
         this.timer -= deltaTime;
-        this.speed = 40;
         this.movingAround(this.randomX,this.randomY,deltaTime);
         if(this.timer<0){         
-            this.randomX = randomRangeInt(-1,2);
-            this.randomY = randomRangeInt(-1,2); 
-            this.checkEqual(this.randomX,this.randomY);
+            this.randomPath();
             this.changeTime=randomRangeInt(3,5);
             this.timer = this.changeTime;
         }
@@ -63,7 +59,7 @@ export class Bat extends Component {
 
     private changeTime: number = 3;
     private timer: number;
-    private speed: number = 40;
+    private speed: number = 60;
 
     checkEqual(x,y){
         //Neu hai so bang nhau
@@ -101,49 +97,43 @@ export class Bat extends Component {
         this.node.setPosition(this.node.position.x + x*this.speed*dt, this.node.position.y + y*this.speed*dt);
     }
 
-    private distanceFollow: number = 200;
-    private direction: Vec3;
-
-
     deltaTime: number;
+
+    randomPath(){
+        var number = 1;
+        var chooseNegative = Math.random()>=0.5;
+        if(chooseNegative){
+            number = -number;
+        }
+
+        var choosePath = Math.random()>=0.5;
+        if(choosePath){
+            if(this.randomX != 0){
+                this.randomX = -this.randomX;
+            }
+            else{
+                this.randomX = number;
+            }
+            this.randomY = 0;
+        }
+        else{
+            if(this.randomY != 0){
+                this.randomY = -this.randomY;
+            }
+            else{
+                this.randomY = number;
+            }
+            this.randomX = 0;
+        }
+    }
+
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D) {
         if(!otherCollider.node.getComponent("PlayerController")){
 
-            var number = 1;
-            var chooseNegative = Math.random()>=0.5;
-            if(chooseNegative){
-                number = -number;
-            }
+           this.randomPath();
 
-            var choosePath = Math.random()>=0.5;
-            this.node.setPosition(this.node.position.x -5, this.node.position.y - 5)
-            if(choosePath){
-                if(this.randomX != 0){
-                    this.randomX = -this.randomX;
-                }
-                else{
-                    this.randomX = number;
-                }
-                
-                this.randomY = 0;
-            }
-            else{
-                if(this.randomY != 0){
-                    this.randomY = -this.randomY;
-                }
-                else{
-                    this.randomY = number;
-                }
-                this.randomX = 0;
-            }
-            selfCollider.off(Contact2DType.BEGIN_CONTACT);
-        }
-    }
-
-    onEndContact(selfCollider: Collider2D, otherCollider: Collider2D) {
-        if(otherCollider.node.getComponent("PlayerController")){
-            selfCollider.on(Contact2DType.BEGIN_CONTACT,this.onBeginContact,this);
+           this.timer = this.changeTime;
         }
     }
 }
