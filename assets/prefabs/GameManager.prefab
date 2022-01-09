@@ -1,0 +1,100 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "GameManager",
+    "_objFlags": 512,
+    "__editorExtras__": {},
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 4
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": -1.4380985013939807e-9,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 0.9999999877884509,
+      "y": 0.9999999924599352,
+      "z": 0.9999999824568198
+    },
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": -1.6479394930792725e-7
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "914a2XQuXFGpq8GQD2FwXpB",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 3
+    },
+    "lengthPotion": {
+      "__uuid__": "78f5d942-fe57-433b-b72b-3b22827ba5c3",
+      "__expectedType__": "cc.Prefab"
+    },
+    "maxLengthBuff": {
+      "__uuid__": "4b9f347e-df41-402f-9d7e-66dc731494ab",
+      "__expectedType__": "cc.Prefab"
+    },
+    "moreBomb": {
+      "__uuid__": "65dd6848-983d-4863-badf-cf3da1d67b33",
+      "__expectedType__": "cc.Prefab"
+    },
+    "speed": {
+      "__uuid__": "db6d7651-ff2f-4353-ab1d-129f95b52488",
+      "__expectedType__": "cc.Prefab"
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "4fvdOvsDFKnpnbMUOAxcSF"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "bc7eJ+Y7tDUpnJmIOa6WSl"
+  }
+]
