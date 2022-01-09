@@ -1,6 +1,5 @@
 
 import { _decorator, Component, Node, Camera, director, UITransform, Vec3, Prefab, Size, misc } from 'cc';
-import { PlayerMovement } from '../player-controller';
 const { ccclass, property } = _decorator;
 
 /**

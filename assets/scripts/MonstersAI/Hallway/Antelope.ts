@@ -187,7 +187,6 @@ export class Antelope extends Component {
 
                 this.animator.setValue('lookX', this.randomX);
                 this.animator.setValue('lookY', this.randomY);
-                this.isFollowing = false;
             }   
         }
     } 
