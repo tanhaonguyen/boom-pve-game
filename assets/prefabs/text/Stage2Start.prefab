@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Stage3Start",
+    "_name": "Stage2Start",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -73,8 +73,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 686,
-      "height": 212
+      "width": 685,
+      "height": 210
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -110,7 +110,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "07d18843-1e90-45d5-86bd-740a7a2ce97e@f9941",
+      "__uuid__": "0808aa5c-ca70-4dc1-bf47-ffa11a0cd823@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,

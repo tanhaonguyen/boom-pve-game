@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Stage3Start",
+    "_name": "Stage1Clear",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -73,8 +73,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 686,
-      "height": 212
+      "width": 739,
+      "height": 210
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -110,7 +110,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "07d18843-1e90-45d5-86bd-740a7a2ce97e@f9941",
+      "__uuid__": "508fc496-7fcd-4c4f-96b3-5afc17e6bb32@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -146,12 +146,12 @@
     "playOnLoad": true,
     "_clips": [
       {
-        "__uuid__": "aab9a222-9048-466d-b543-b0127299cd50",
+        "__uuid__": "a676bc91-7018-4473-801d-c6a5405897d7",
         "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "aab9a222-9048-466d-b543-b0127299cd50",
+      "__uuid__": "a676bc91-7018-4473-801d-c6a5405897d7",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": ""

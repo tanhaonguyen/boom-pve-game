@@ -50,9 +50,6 @@ export class BotModePlayerController extends Component {
     private arrowUpDown: boolean = false;
     private arrowDownDown: boolean = false;
 
-    private coinCollectedPerRound: number = 0;
-    private coinToCollectPerRound: number = 0;
-
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
         BotModePlayerController._instance = this;
@@ -257,17 +254,8 @@ export class BotModePlayerController extends Component {
 
     public onCoinCollected() {
         ++this.coinCount;
-        ++this.coinCollectedPerRound;
         find('Canvas/CoinCount/CoinCountLabel').getComponent(Label).string = this.coinCount.toString();
         sys.localStorage.setItem("coinCount", this.coinCount.toString());
-
-        if (this.coinCollectedPerRound === this.coinToCollectPerRound) {
-            setTimeout(() => BotModeSceneController.instance.onClear(), 500);
-        }
-    }
-
-    public updateCoinCollectedPerRound(numCoin: number) {
-        this.coinCollectedPerRound = 0;
-        this.coinToCollectPerRound = numCoin;
+        this.scheduleOnce(() => BotModeSceneController.instance.onClear(), 5);
     }
 }

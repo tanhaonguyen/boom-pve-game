@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "1ceb4ad9-eb4d-4ee3-a8c1-1c90c9cffa5c",
+  "uuid": "d87a9006-2b3f-47d1-afd3-4ad227e7f362",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Stage3Start"
+    "syncNodeName": "Stage1Clear"
   }
 }
