@@ -211,7 +211,7 @@ export class PlayerController extends Component {
                 this.getComponent(Animation).play("player-drown");  
 
                 this.scheduleOnce(() => {
-                    this.gameManager.loseGame(this.node.parent.name);
+                    this.gameManager.loseGame();
                 }, 2.5);
                 break;
             case ColliderGroup.Minion:
@@ -223,7 +223,7 @@ export class PlayerController extends Component {
                 this.getComponent(Animation).play("player-dead");  
 
                 this.scheduleOnce(() => {
-                    this.gameManager.loseGame(this.node.parent.name);
+                    this.gameManager.loseGame();
                 }, 2.5);
                 break;
         }
