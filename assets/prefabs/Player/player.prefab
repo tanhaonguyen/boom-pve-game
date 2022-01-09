@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Player",
+    "_name": "player",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -43,8 +43,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -390,
-      "y": -100,
+      "x": -110,
+      "y": -240,
       "z": 0
     },
     "_lrot": {

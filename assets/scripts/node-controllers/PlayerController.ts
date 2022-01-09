@@ -1,5 +1,5 @@
 
-import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D } from 'cc';
+import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, director } from 'cc';
 import { GameManager } from '../GameManager';
 import { Buff, ColliderGroup } from '../GlobalDefines';
 import { BombController } from './BombController';
@@ -63,7 +63,10 @@ export class PlayerController extends Component {
     }
 
     update(deltaTime: number) {
-        // console.log(this.node.getComponent(RigidBody2D).enabled);
+        if (this._playerIsDead) {
+            return;
+        }
+
         if (this.arrowLeftDown) {
             this.node.setPosition(this.node.position.x - this._speed * deltaTime, this.node.position.y);
         }
@@ -208,7 +211,19 @@ export class PlayerController extends Component {
                 this.getComponent(Animation).play("player-drown");  
 
                 this.scheduleOnce(() => {
-                    this.gameManager.loseGame();
+                    this.gameManager.loseGame(this.node.parent.name);
+                }, 2.5);
+                break;
+            case ColliderGroup.Minion:
+                this._playerIsDead = true;
+
+                input.off(Input.EventType.KEY_DOWN, this.onKeyPressed, this);
+                input.off(Input.EventType.KEY_UP, this.onKeyReleased, this);
+
+                this.getComponent(Animation).play("player-dead");  
+
+                this.scheduleOnce(() => {
+                    this.gameManager.loseGame(this.node.parent.name);
                 }, 2.5);
                 break;
         }

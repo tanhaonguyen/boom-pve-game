@@ -64,7 +64,7 @@ export class GameManager extends Component {
         }          
     }
 
-    loseGame(): void {
-        console.log("Lose game");
+    loseGame(sceneName: string): void {
+        console.log("Lose game at: ", sceneName);
     }
 }
