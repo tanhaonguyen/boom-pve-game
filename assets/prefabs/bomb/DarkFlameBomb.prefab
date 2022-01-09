@@ -446,8 +446,24 @@
     "__prefab": {
       "__id__": 13
     },
-    "explosionPrefab": {
+    "centerExplosion": {
       "__uuid__": "e59bd0bd-1b68-4577-b131-0b8ab2e74e3d",
+      "__expectedType__": "cc.Prefab"
+    },
+    "leftExplosion": {
+      "__uuid__": "2bbf62c9-23db-4223-a89c-ef110a5bf909",
+      "__expectedType__": "cc.Prefab"
+    },
+    "rightExplosion": {
+      "__uuid__": "c649062a-2a5f-47ad-90a8-307d0c3b0e08",
+      "__expectedType__": "cc.Prefab"
+    },
+    "upExplosion": {
+      "__uuid__": "2baf5cb1-c357-4ca1-a654-aa5eb592a36f",
+      "__expectedType__": "cc.Prefab"
+    },
+    "downExplosion": {
+      "__uuid__": "3c924581-37dd-4259-9927-480cff6b4c47",
       "__expectedType__": "cc.Prefab"
     },
     "_id": ""

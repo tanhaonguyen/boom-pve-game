@@ -14,10 +14,14 @@ export class PlayerController extends Component {
     }
 
     //------------------------------------------------------------------------------
-    private _bombAmount: number = 2;
+    private _bombAmount: number = 1;
     private _placedBomb: number = 0;
     private _speed: number = 200;
     private _bombLength: number = 1;
+
+    public get bombLength(): number {
+        return this._bombLength;
+    }
 
     //------------------------------------------------------------------------------
     @property(Prefab)

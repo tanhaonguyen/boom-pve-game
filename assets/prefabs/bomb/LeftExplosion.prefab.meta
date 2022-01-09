@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "4f94e13a-0bfa-4d32-a9e2-1fdcd061c6a8",
+  "uuid": "2bbf62c9-23db-4223-a89c-ef110a5bf909",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Explosionn"
+    "syncNodeName": "LeftExplosion"
   }
 }
