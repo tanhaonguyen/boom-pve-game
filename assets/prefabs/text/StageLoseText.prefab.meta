@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "a27ebaef-33d1-4c63-b0f9-8e37e284748a",
+  "uuid": "14cb22f6-5255-4891-8478-8e29f50ffec0",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Stage1Start"
+    "syncNodeName": "StageLoseText"
   }
 }
