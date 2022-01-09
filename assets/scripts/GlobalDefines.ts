@@ -10,7 +10,7 @@ export enum ColliderGroup {
     Player = 2,
     Buff = 4,
     Bomb = 8,
-    DestroyableNode = 16
+    DestroyableNode = 32
 }
 
 export type Coordinate = {

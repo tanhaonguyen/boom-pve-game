@@ -14,7 +14,7 @@ export class PlayerController extends Component {
     }
 
     //------------------------------------------------------------------------------
-    private _bombAmount: number = 1;
+    private _bombAmount: number = 2;
     private _placedBomb: number = 0;
     private _speed: number = 200;
     private _bombLength: number = 1;
@@ -54,6 +54,7 @@ export class PlayerController extends Component {
     }
 
     update(deltaTime: number) {
+        // console.log(this.node.getComponent(RigidBody2D).enabled);
         if (this.arrowLeftDown) {
             this.node.setPosition(this.node.position.x - this._speed * deltaTime, this.node.position.y);
         }
@@ -220,7 +221,7 @@ export class PlayerController extends Component {
                 this._bombAmount = (this._bombAmount < this.maxBombAmount) ? this._bombAmount + 1 : this._bombAmount;
                 break;
             case Buff.Speed:
-                this._speed = (this._speed < this.maxSpeed) ? this._speed + 25 : this._speed;
+                this._speed = (this._speed < this.maxSpeed) ? this._speed + 50 : this._speed;
                 break;
         }
     }

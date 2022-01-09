@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Collider2D, Contact2DType, IPhysics2DContact } from 'cc';
+import { _decorator, Component, Node, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, PolygonCollider2D } from 'cc';
 import { ColliderGroup } from '../GlobalDefines';
 import { BombController } from './BombController';
 const { ccclass, property } = _decorator;
@@ -14,7 +14,7 @@ export class ExplosionController extends Component {
     }
 
     start() {
-        let collider: Collider2D = this.getComponent(Collider2D);
+        this.collider = this.getComponent(Collider2D);
         if (this.collider) {
             this.collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
             this.collider.on(Contact2DType.END_CONTACT, this.onEndContact, this);
@@ -38,10 +38,15 @@ export class ExplosionController extends Component {
         switch (otherCollider.group){
             case ColliderGroup.Bomb:
                 console.log("Boom another bomb" + otherCollider.node.toString());
+                otherCollider.node.getComponent(RigidBody2D).destroy();
+                otherCollider.node.getComponent(PolygonCollider2D).destroy();
                 otherCollider.node.getComponent(BombController).explode();
+                // otherCollider.node.destroy();
                 break;
             case ColliderGroup.DestroyableNode:
-                console.log("Now we destroy object" + otherCollider.node.toString());
+                otherCollider.node.destroy();
+                break;
+            case ColliderGroup.Buff:
                 otherCollider.node.destroy();
                 break;
         }

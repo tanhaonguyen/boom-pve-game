@@ -43,8 +43,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -238,
-      "y": 5,
+      "x": -229,
+      "y": -11,
       "z": 0
     },
     "_lrot": {
@@ -177,11 +177,11 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": {
       "__id__": 9
     },
-    "enabledContactListener": true,
+    "enabledContactListener": false,
     "bullet": false,
     "awakeOnLoad": false,
     "_group": 8,
@@ -447,7 +447,7 @@
       "__id__": 13
     },
     "explosionPrefab": {
-      "__uuid__": "5e1edbb2-9d91-460b-9b71-ead8492273cf",
+      "__uuid__": "e59bd0bd-1b68-4577-b131-0b8ab2e74e3d",
       "__expectedType__": "cc.Prefab"
     },
     "_id": ""
