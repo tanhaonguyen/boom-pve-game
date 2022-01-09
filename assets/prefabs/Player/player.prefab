@@ -43,8 +43,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -230,
-      "y": -120,
+      "x": -390,
+      "y": -100,
       "z": 0
     },
     "_lrot": {
@@ -189,6 +189,10 @@
       {
         "__uuid__": "daee5db6-f949-408b-adbb-d7909f6b868e",
         "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "3d99cd1d-c2ef-4fd7-a0ef-86dcabf6c943",
+        "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": null,
@@ -214,7 +218,7 @@
       "__expectedType__": "cc.Prefab"
     },
     "maxBombAmount": 10,
-    "maxSpeed": 1000,
+    "maxSpeed": 500,
     "maxBombLength": 10,
     "_id": ""
   },
@@ -280,7 +284,7 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 40,
+      "width": 30,
       "height": 20
     },
     "_id": ""

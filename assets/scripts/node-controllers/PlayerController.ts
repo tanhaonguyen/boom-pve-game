@@ -1,5 +1,6 @@
 
 import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D } from 'cc';
+import { GameManager } from '../GameManager';
 import { Buff, ColliderGroup } from '../GlobalDefines';
 import { BombController } from './BombController';
 const { ccclass, property } = _decorator;
@@ -16,8 +17,9 @@ export class PlayerController extends Component {
     //------------------------------------------------------------------------------
     private _bombAmount: number = 1;
     private _placedBomb: number = 0;
-    private _speed: number = 200;
+    private _speed: number = 100;
     private _bombLength: number = 1;
+    private _playerIsDead: boolean = false;
 
     public get bombLength(): number {
         return this._bombLength;
@@ -41,6 +43,7 @@ export class PlayerController extends Component {
     private arrowDownDown: boolean = false;
 
     private collider: Collider2D = undefined;
+    private gameManager: GameManager = undefined;
 
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
@@ -51,6 +54,8 @@ export class PlayerController extends Component {
     }
 
     start() {
+        this.gameManager = GameManager.instance;
+
         this.collider = this.node.getComponent(Collider2D);
         if (this.collider) {
             this.collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
@@ -185,11 +190,26 @@ export class PlayerController extends Component {
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null): void {
         // console.log("Player begin contact with", otherCollider.group);
 
-        switch (otherCollider.group) {
+        if (this._playerIsDead) {
+            return;
+        }
 
+        switch (otherCollider.group) {
             case ColliderGroup.Buff:
                 this.updatePlayerStats(otherCollider.tag);
                 otherCollider.node.destroy();
+                break;
+            case ColliderGroup.Explosion:
+                this._playerIsDead = true;
+
+                input.off(Input.EventType.KEY_DOWN, this.onKeyPressed, this);
+                input.off(Input.EventType.KEY_UP, this.onKeyReleased, this);
+
+                this.getComponent(Animation).play("player-drown");  
+
+                this.scheduleOnce(() => {
+                    this.gameManager.loseGame();
+                }, 2.5);
                 break;
         }
     }
