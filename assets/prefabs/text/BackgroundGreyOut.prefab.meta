@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "a27ebaef-33d1-4c63-b0f9-8e37e284748a",
+  "uuid": "27035a40-3732-4d16-980e-482fb30bbc05",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Stage1Start"
+    "syncNodeName": "BackgroundGreyOut"
   }
 }
