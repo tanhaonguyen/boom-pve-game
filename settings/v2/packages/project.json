@@ -23,11 +23,11 @@
       },
       {
         "index": 4,
-        "name": "deleted 3"
+        "name": "Explosion"
       },
       {
         "index": 5,
-        "name": "deleted 4"
+        "name": "Destroyable Node"
       },
       {
         "index": 6,
@@ -37,10 +37,10 @@
     "collisionMatrix": {
       "0": 3,
       "1": 5,
-      "2": 2,
-      "3": 0,
-      "4": 0,
-      "5": 0,
+      "2": 18,
+      "3": 16,
+      "4": 44,
+      "5": 16,
       "6": 0
     }
   }

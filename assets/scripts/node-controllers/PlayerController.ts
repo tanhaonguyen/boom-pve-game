@@ -1,21 +1,8 @@
 
 import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D } from 'cc';
+import { Buff, ColliderGroup } from '../GlobalDefines';
 import { BombController } from './BombController';
 const { ccclass, property } = _decorator;
-
-enum Buff {
-    LengthPotion,
-    MaxLengthBuff,
-    MoreBomb,
-    Speed
-}
-
-enum ColliderGroup {
-    DEFAULT = 1,
-    Player = 2,
-    Buff = 4,
-    Bomb = 8,
-}
 
 @ccclass('PlayerController')
 export class PlayerController extends Component {
@@ -29,7 +16,7 @@ export class PlayerController extends Component {
     //------------------------------------------------------------------------------
     private _bombAmount: number = 1;
     private _placedBomb: number = 0;
-    private _speed: number = 100;
+    private _speed: number = 200;
     private _bombLength: number = 1;
 
     //------------------------------------------------------------------------------
@@ -47,7 +34,9 @@ export class PlayerController extends Component {
     private arrowLeftDown: boolean = false;
     private arrowRightDown: boolean = false;
     private arrowUpDown: boolean = false;
-    private arrowDownDown: boolean = false;W
+    private arrowDownDown: boolean = false;
+
+    private collider: Collider2D = undefined;
 
     //--------------------------Life-cycle-functions--------------------------------
     onLoad() {
@@ -58,12 +47,10 @@ export class PlayerController extends Component {
     }
 
     start() {
-        let collider: Collider2D = this.node.getComponent(Collider2D);
-        if (collider) {
-            collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
+        this.collider = this.node.getComponent(Collider2D);
+        if (this.collider) {
+            this.collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         }
-
-
     }
 
     update(deltaTime: number) {

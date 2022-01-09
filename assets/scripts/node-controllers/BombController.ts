@@ -1,12 +1,10 @@
 
 import { _decorator, Component, Node, PolygonCollider2D, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, instantiate, Prefab, director, ExtrapolationMode } from 'cc';
+import { Coordinate } from '../GlobalDefines';
 import { PlayerController } from './PlayerController';
 const { ccclass, property } = _decorator;
 
-type Coordinate = {
-    x: number,
-    y: number
-}
+
 
 @ccclass('BombController')
 export class BombController extends Component {
@@ -37,7 +35,7 @@ export class BombController extends Component {
     update(deltaTime: number) {
     }
     onDestroy() {
-        console.log("Go to function onDestroy");
+        // console.log("Go to function onDestroy");
 
         this.collider.off(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         this.collider.off(Contact2DType.END_CONTACT, this.onEndContact, this);
