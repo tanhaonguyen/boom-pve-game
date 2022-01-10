@@ -81,6 +81,10 @@
       "__uuid__": "12e8f27a-58eb-4078-9d4e-7702d92569da",
       "__expectedType__": "cc.Prefab"
     },
+    "loseScreen": {
+      "__uuid__": "a46dfc08-e34f-4c25-946c-7bb2d1bb2b7e",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": ""
   },
   {

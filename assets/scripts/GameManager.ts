@@ -20,6 +20,8 @@ export class GameManager extends Component {
     moreBomb: Prefab = undefined;
     @property(Prefab)
     speed: Prefab = undefined;
+    @property(Prefab)
+    loseScreen: Prefab = undefined;
     
     onLoad() {
         GameManager._instance = this;
@@ -66,6 +68,14 @@ export class GameManager extends Component {
 
     loseGame(): void {
         console.log("Lose game at: ", this.node.name);
+        let tmp = instantiate(this.loseScreen);
+        tmp.setParent(this.node.getParent().getChildByName("Canvas"));
+        tmp.setPosition(new Vec3(0, 0, 0));          
+
+        this.scheduleOnce(() => {
+            director.loadScene("menu");
+        }, 2);
+
     }
 
     loadSurvival(): void {
