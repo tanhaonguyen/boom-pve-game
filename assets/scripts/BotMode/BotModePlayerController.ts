@@ -1,23 +1,11 @@
 
 import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, sys, Label, find } from 'cc';
+import { Buff, ColliderGroup } from '../GlobalDefines';
 import { BotModeBombController } from './BotModeBombController';
 import { BotModeBotController } from './BotModeBotController';
 import { BotModeSceneController } from './BotModeSceneController';
 const { ccclass, property } = _decorator;
 
-enum Buff {
-    LengthPotion,
-    MaxLengthBuff,
-    MoreBomb,
-    Speed
-}
-
-enum ColliderGroup {
-    DEFAULT = 1,
-    Player = 2,
-    Buff = 4,
-    Bomb = 8
-}
 
 @ccclass('BotModePlayerController')
 export class BotModePlayerController extends Component {
@@ -31,7 +19,7 @@ export class BotModePlayerController extends Component {
     private _bombAmount: number = 1;
     private _placedBomb: number = 0;
     private _speed: number = 100;
-    private _bombLength: number = 1;
+    public bombLength: number = 1;
     private coinCount: number = 0;
 
     //------------------------------------------------------------------------------
@@ -133,8 +121,8 @@ export class BotModePlayerController extends Component {
 
                     let occupied: boolean = false;
                   
-                    for (let coor of BotModeBombController.occupyCoor) {
-                        if (coor.x === suitableX && coor.y === suitableY) {
+                    for (let bombData of BotModeBombController.bombData) {
+                        if (bombData.coor.x === suitableX && bombData.coor.y === suitableY) {
                             occupied = true;
                             break;
                         }
@@ -146,8 +134,9 @@ export class BotModePlayerController extends Component {
                         let bomb = instantiate(this.bombPrefab);
                         bomb.setParent(this.node.getParent().getChildByName("Bomb"));
                         bomb.setPosition(new Vec3(suitableX, suitableY, 0));
+                        bomb.getComponent(BotModeBombController).bombLength = this.bombLength;
 
-                        BotModeBombController.pushPositionToQueue(suitableX, suitableY); // Mark this coordinate is occupied
+                        BotModeBombController.pushPositionToQueue(suitableX, suitableY, this.bombLength, 3); // Mark this coordinate is occupied
                     }
                 }
                 break;
@@ -232,10 +221,10 @@ export class BotModePlayerController extends Component {
     updatePlayerStats(buffTag: number): void {
         switch (buffTag) {
             case Buff.LengthPotion:
-                this._bombLength = (this._bombLength < this.maxBombLength) ? this._bombLength + 1 : this._bombLength;
+                this.bombLength = (this.bombLength < this.maxBombLength) ? this.bombLength + 1 : this.bombLength;
                 break;
             case Buff.MaxLengthBuff:
-                this._bombLength = this.maxBombLength;
+                this.bombLength = this.maxBombLength;
                 break;
             case Buff.MoreBomb:
                 this._bombAmount = (this._bombAmount < this.maxBombAmount) ? this._bombAmount + 1 : this._bombAmount;

@@ -2,6 +2,7 @@
 import { _decorator, Component, find, Sprite, Color, Node, Vec3, director, Prefab, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
  
+
 @ccclass('BotModeSceneController')
 export class BotModeSceneController extends Component {
     @property(Prefab)

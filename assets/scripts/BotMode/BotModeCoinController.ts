@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Collider2D, Contact2DType, IPhysics2DContact } from 'cc';
 import { BotModePlayerController } from './BotModePlayerController';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('BotModeCoinController')
 export class BotModeCoinController extends Component {

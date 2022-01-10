@@ -1,8 +1,10 @@
 
 import { _decorator, Component, Collider2D, Contact2DType, IPhysics2DContact, Vec2, Vec3 } from 'cc';
+import { ColliderGroup } from '../GlobalDefines';
 import { BotModeBotController } from './BotModeBotController';
 import { BotModePlayerController } from './BotModePlayerController';
 const { ccclass } = _decorator;
+
 
 @ccclass('BotModeExplosionController')
 export class BotModeExplosionController extends Component {
@@ -32,10 +34,10 @@ export class BotModeExplosionController extends Component {
         console.log("Explosion touched object group" + otherCollider.group + " with name " + otherCollider.node.name);
 
         switch (otherCollider.group){
-            case 2: // Player
+            case ColliderGroup.Player: // Player
                 BotModePlayerController.instance.onKilled();
                 break;
-            case 1: // Other objects
+            case ColliderGroup.DEFAULT: // Other objects
                 if (otherCollider.tag == 100) { // Destroyable object
                     otherCollider.node.destroy();
                     

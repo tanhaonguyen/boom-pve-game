@@ -1,5 +1,6 @@
 
 import { _decorator, Component, resources, JsonAsset, find, Node, instantiate, Vec3, Vec2, Prefab, Animation, Collider2D, Contact2DType, IPhysics2DContact } from 'cc';
+import { Buff, ColliderGroup } from '../GlobalDefines';
 import { BotModeBombController } from './BotModeBombController';
 import { BotModePlayerController } from './BotModePlayerController';
 import { BotModeSceneController } from './BotModeSceneController';
@@ -15,19 +16,6 @@ enum AIAction {
     Dead
 }
 
-enum ColliderGroup {
-    DEFAULT = 1,
-    Player = 2,
-    Buff = 4,
-    Bomb = 8
-}
-
-enum Buff {
-    LengthPotion,
-    MaxLengthBuff,
-    MoreBomb,
-    Speed
-}
 
 @ccclass('BotModeBotController')
 export class BotModeBotController extends Component {
@@ -49,12 +37,17 @@ export class BotModeBotController extends Component {
     @property
     maxBombAmount: number = 10;
 
+    @property
+    maxBombLength: number = 10;
+
     private sceneMatrix: string[][] = [];
     private action: AIAction = AIAction.None;
 
     private speed: number = 100;
     private bombAmount: number = 1;
     private placedBomb: number = 0;
+
+    public bombLength: number = 1;
 
     private movingUp: boolean = false;
     private movingLeft: boolean = false;
@@ -113,8 +106,8 @@ export class BotModeBotController extends Component {
 
                 let occupied: boolean = false;
               
-                for (let coor of BotModeBombController.occupyCoor) {
-                    if (coor.x === suitableX && coor.y === suitableY) {
+                for (let bombData of BotModeBombController.bombData) {
+                    if (bombData.coor.x === suitableX && bombData.coor.y === suitableY) {
                         occupied = true;
                         break;
                     }
@@ -126,8 +119,9 @@ export class BotModeBotController extends Component {
                     let bomb = instantiate(this.bombPrefab);
                     bomb.setParent(this.node.getParent().getChildByName("Bomb"));
                     bomb.setPosition(new Vec3(suitableX, suitableY, 0));
+                    bomb.getComponent(BotModeBombController).bombLength = this.bombLength;
 
-                    BotModeBombController.pushPositionToQueue(suitableX, suitableY); // Mark this coordinate is occupied
+                    BotModeBombController.pushPositionToQueue(suitableX, suitableY, this.bombLength, 3); // Mark this coordinate is occupied
                 }
             }
         }
@@ -309,7 +303,7 @@ export class BotModeBotController extends Component {
 
             if (newX >= 0 && newX < this.sceneMatrix[0].length && newY >= 0 && newY < this.sceneMatrix.length) {
                 if (this.sceneMatrix[newY][newX] !== 'b' && this.sceneMatrix[newY][newX] !== 'o') {
-                    if (!this.__canBeKilled(new Vec2(newX, newY)) || this.__isNearBot(new Vec2(newX, newY)))
+                    if (!this.__canBeKilled(new Vec2(newX, newY)))
                         nextNodes.push(new Vec2(newX, newY));
                 }
             }
@@ -320,30 +314,25 @@ export class BotModeBotController extends Component {
 
     // Detemine if a bomb can kill bot if stand on this position
     private __canBeKilled(aiSquareIdx: Vec2) {
-        for (let coor of BotModeBombController.occupyCoor) {
-            let bombSquareIdx = this.__getMatrixIdxFromPos(new Vec3(coor.x, coor.y, 0), true);
+        for (let bombData of BotModeBombController.bombData) {
+            let bombSquareIdx = this.__getMatrixIdxFromPos(new Vec3(bombData.coor.x, bombData.coor.y, 0), true);
 
-            if (aiSquareIdx.x === bombSquareIdx.x && Math.abs(aiSquareIdx.y - bombSquareIdx.y) <= 2)
+            if (aiSquareIdx.x === bombSquareIdx.x && Math.abs(aiSquareIdx.y - bombSquareIdx.y) <= bombData.length && bombData.timeLeft <= 1)
                 return true;
 
-            if (aiSquareIdx.y === bombSquareIdx.y && Math.abs(aiSquareIdx.x - bombSquareIdx.x) <= 2)
+            if (aiSquareIdx.y === bombSquareIdx.y && Math.abs(aiSquareIdx.x - bombSquareIdx.x) <= bombData.length && bombData.timeLeft <= 1)
                 return true;
         }
         
         return false;
     }
 
-    private __isNearBot(aiSquareIdx: Vec2) {
-        let curIdx = this.__getMatrixIdxFromPos(this.node.getPosition(), true);
-        return Math.abs(aiSquareIdx.y - curIdx.y) <= 2 || Math.abs(aiSquareIdx.x - curIdx.x) <= 2;
-    }
-
     // Determine if ai can kill player, bomb explode area is 3x3, bomb will be placed in AI position
     private __canKillPlayer(aiSquareIdx: Vec2, playerSquareIdx: Vec2) {
-        if (aiSquareIdx.x === playerSquareIdx.x && Math.abs(aiSquareIdx.y - playerSquareIdx.y) <= 2)
+        if (aiSquareIdx.x === playerSquareIdx.x && Math.abs(aiSquareIdx.y - playerSquareIdx.y) <= Math.min(3, this.bombLength))
             return true;
         
-        if (aiSquareIdx.y === playerSquareIdx.y && Math.abs(aiSquareIdx.x - playerSquareIdx.x) <= 2)
+        if (aiSquareIdx.y === playerSquareIdx.y && Math.abs(aiSquareIdx.x - playerSquareIdx.x) <= Math.min(3, this.bombLength))
             return true;
         
         return false;
@@ -412,10 +401,10 @@ export class BotModeBotController extends Component {
     private __updateBotStats(buffTag: number, pos: Vec3): void {
         switch (buffTag) {
             case Buff.LengthPotion:
-                // this._bombLength = (this._bombLength < this.maxBombLength) ? this._bombLength + 1 : this._bombLength;
+                this.bombLength = (this.bombLength < this.maxBombLength) ? this.bombLength + 1 : this.bombLength;
                 break;
             case Buff.MaxLengthBuff:
-                // this._bombLength = this.maxBombLength;
+                this.bombLength = this.maxBombLength;
                 break;
             case Buff.MoreBomb:
                 this.bombAmount = (this.bombAmount < this.maxBombAmount) ? this.bombAmount + 1 : this.bombAmount;
