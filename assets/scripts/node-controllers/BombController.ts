@@ -55,7 +55,7 @@ export class BombController extends Component {
 
     // ------------------------------------------------------------------------------------
     public explode() {
-        this.audioSource.playOneShot(this.audioSource.clip, 1);
+        this.audioSource.playOneShot(this.audioSource.clip, 5);
 
         this.generateExplosion(this.player.bombLength);
         this.player.updatePlacedBombAmount(); // Decrease the amount of bomb that has been placed by player
