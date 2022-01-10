@@ -31,15 +31,15 @@ export class ControlScene extends Component {
     start () {
         // [3]
         var scene = this.node;
-        if(scene.name == "Cementary"){
+        if(scene.getChildByName("Cementary")){
             this.animStart = this.node.getChildByName("Stage1Start");
             this.animClear = this.node.getChildByName("Stage1Clear");
         }
-        else if(scene.name == "Hallway"){
+        else if(scene.getChildByName("Hallway")){
             this.animStart = this.node.getChildByName("Stage2Start");
             this.animClear = this.node.getChildByName("Stage2Clear");
         }
-        else if(scene.name == "Tomb"){
+        else if(scene.getChildByName("Tomb")){
             this.animStart = this.node.getChildByName("Stage3Start");
             this.animClear = this.node.getChildByName("Stage3Clear");
         }
@@ -85,12 +85,12 @@ export class ControlScene extends Component {
             var mapPos = tiledMap.getPosition();
             camera.setPosition(mapPos.x,mapPos.y,1000);
             
-            var scene = this;
+            var scene = this.node;
             var name = null;
-            if(scene.name == "Cementary"){
+            if(scene.getChildByName("Cementary")){
                 name = "Hallway";
             }
-            else if(scene.name == "Hallway"){
+            else if(scene.getChildByName("Hallway")){
                 name = "Tomb";
             }
             director.preloadScene(name);
