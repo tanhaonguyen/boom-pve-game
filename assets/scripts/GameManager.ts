@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec3, Prefab, instantiate } from 'cc';
+import { _decorator, Component, Node, Vec3, Prefab, instantiate, director } from 'cc';
 const { ccclass, property } = _decorator;
  
 @ccclass('GameManager')
@@ -66,5 +66,17 @@ export class GameManager extends Component {
 
     loseGame(): void {
         console.log("Lose game at: ", this.node.name);
+    }
+
+    loadSurvival(): void {
+        director.loadScene("Cementary");
+    }
+
+    loadChallenger(): void {
+        director.loadScene("Island");
+    }
+
+    loadBoss(): void {
+        director.loadScene("gameplay");
     }
 }
