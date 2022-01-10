@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, PolygonCollider2D, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, instantiate, Prefab, director, ExtrapolationMode, Vec3 } from 'cc';
+import { _decorator, Component, Node, PolygonCollider2D, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, instantiate, Prefab, director, ExtrapolationMode, Vec3, AudioSource } from 'cc';
 import { Coordinate } from '../GlobalDefines';
 import { ExplosionController } from './ExplosionController';
 import { PlayerController } from './PlayerController';
@@ -12,6 +12,7 @@ export class BombController extends Component {
 
     public static occupyCoor: Coordinate[] = [];
 
+    private audioSource: AudioSource = undefined;
     // ---------------------------------------------------------------------------------
     @property(Prefab)
     centerExplosion: Prefab = undefined;
@@ -36,6 +37,7 @@ export class BombController extends Component {
     start() {
         this.scheduleOnce(this.explode, 3);
         this.player = PlayerController.instance;
+        this.audioSource = this.node.getComponent(AudioSource);
     }
 
     update(deltaTime: number) {
@@ -53,6 +55,8 @@ export class BombController extends Component {
 
     // ------------------------------------------------------------------------------------
     public explode() {
+        this.audioSource.playOneShot(this.audioSource.clip, 1);
+
         this.generateExplosion(this.player.bombLength);
         this.player.updatePlacedBombAmount(); // Decrease the amount of bomb that has been placed by player
         BombController.popPositionFromQueue(); // Pop the position of the bomb that has just exploded

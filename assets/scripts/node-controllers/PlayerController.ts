@@ -1,5 +1,5 @@
 
-import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, director } from 'cc';
+import { _decorator, Component, EventKeyboard, KeyCode, Animation, Vec3, Prefab, instantiate, Input, input, Collider2D, Contact2DType, IPhysics2DContact, RigidBody2D, director, AudioSource } from 'cc';
 import { GameManager } from '../GameManager';
 import { Buff, ColliderGroup } from '../GlobalDefines';
 import { BombController } from './BombController';
@@ -25,6 +25,7 @@ export class PlayerController extends Component {
         return this._bombLength;
     }
 
+    private audioSource: AudioSource = undefined;
     //------------------------------------------------------------------------------
     @property(Prefab)
     bombPrefab: Prefab = undefined;
@@ -55,6 +56,7 @@ export class PlayerController extends Component {
 
     start() {
         this.gameManager = GameManager.instance;
+        this.audioSource = this.node.getComponent(AudioSource);
 
         this.collider = this.node.getComponent(Collider2D);
         if (this.collider) {
@@ -199,6 +201,8 @@ export class PlayerController extends Component {
 
         switch (otherCollider.group) {
             case ColliderGroup.Buff:
+                this.audioSource.playOneShot(this.audioSource.clip, 1);
+                
                 this.updatePlayerStats(otherCollider.tag);
                 otherCollider.node.destroy();
                 break;
